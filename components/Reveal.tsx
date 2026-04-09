@@ -5,11 +5,10 @@ interface Props {
   children: React.ReactNode
   delay?: number
   className?: string
-  as?: keyof JSX.IntrinsicElements
 }
 
-export default function Reveal({ children, delay = 0, className = '', as: Tag = 'div' }: Props) {
-  const ref = useRef<HTMLElement>(null)
+export default function Reveal({ children, delay = 0, className = '' }: Props) {
+  const ref = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const el = ref.current
@@ -23,12 +22,12 @@ export default function Reveal({ children, delay = 0, className = '', as: Tag = 
   }, [])
 
   return (
-    <Tag
-      ref={ref as React.RefObject<never>}
+    <div
+      ref={ref}
       className={`reveal ${className}`}
       style={delay ? { transitionDelay: `${delay}ms` } : undefined}
     >
       {children}
-    </Tag>
+    </div>
   )
 }
