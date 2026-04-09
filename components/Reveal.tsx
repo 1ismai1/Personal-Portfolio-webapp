@@ -1,8 +1,8 @@
 'use client'
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, type ReactNode } from 'react'
 
 interface Props {
-  children: React.ReactNode
+  children: ReactNode
   delay?: number
   className?: string
 }

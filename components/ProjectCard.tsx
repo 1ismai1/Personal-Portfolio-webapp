@@ -1,5 +1,5 @@
 'use client'
-import { useRef } from 'react'
+import React, { useRef } from 'react'
 
 interface Props {
   badge: React.ReactNode
