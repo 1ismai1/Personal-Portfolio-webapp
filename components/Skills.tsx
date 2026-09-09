@@ -17,7 +17,7 @@ const categories = [
 
 export default function Skills() {
   return (
-    <section id="skills" className="skills" aria-labelledby="skills-title">
+    <section id="skills" className="skills page" aria-labelledby="skills-title">
       <div className="container">
         <Reveal className="sec-head">
           <div className="sec-label">Technical Toolkit</div>

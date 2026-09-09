@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import { Newsreader, Figtree } from 'next/font/google'
 import './globals.css'
-import Cursor from '@/components/Cursor'
 import Nav from '@/components/Nav'
 
 const newsreader = Newsreader({
@@ -31,7 +30,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* .grain and .ambient are display:none in Soft Field — safe to delete these two lines */}
         <div className="grain" aria-hidden="true" />
         <div className="ambient" aria-hidden="true" />
-        <Cursor />
         <Nav />
         {children}
       </body>

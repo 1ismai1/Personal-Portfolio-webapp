@@ -1,17 +1,10 @@
 import Reveal from './Reveal'
 import Image from 'next/image'
 
-export default function Reflection() {
+export default function ExoArmCaseStudy() {
   return (
-    <section id="reflection" className="reflection" aria-labelledby="refl-title">
+    <div className="reflection">
       <div className="container">
-        <Reveal className="sec-head">
-          <div className="sec-label">Exo Arm — ENG 1P13</div>
-          <h2 className="sec-title" id="refl-title">
-            Learning<br /><em style={{ fontStyle: 'italic', fontWeight: 300 }}>Reflection</em>
-          </h2>
-        </Reveal>
-
         {/* Intro + device photos */}
         <Reveal className="refl-intro">
           <div className="refl-intro-text">
@@ -179,6 +172,6 @@ export default function Reflection() {
 
         </div>
       </div>
-    </section>
+    </div>
   )
 }

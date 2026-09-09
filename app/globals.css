@@ -56,7 +56,7 @@
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; scroll-snap-type: y mandatory; }
 
 body {
   background: var(--bg);
@@ -76,24 +76,6 @@ body {
   border-radius: var(--r-pill);
 }
 
-/* ── Cursor (optional; delete this block and `cursor: none` to restore
-      the native cursor — the system does not depend on it) ── */
-body { cursor: none; }
-#cur {
-  position: fixed; width: 7px; height: 7px;
-  background: var(--lilac); border-radius: 50%;
-  pointer-events: none; z-index: 9999;
-  transform: translate(-50%, -50%);
-  transition: width .18s, height .18s, opacity .2s;
-}
-#cur-ring {
-  position: fixed; width: 30px; height: 30px;
-  border: 1.5px solid rgba(201, 176, 218, .38); border-radius: 50%;
-  pointer-events: none; z-index: 9998;
-  transform: translate(-50%, -50%);
-  transition: width .2s, height .2s, border-color .2s;
-}
-
 /* ── Grain / ambient: kept as no-op hooks so layout.tsx still compiles.
       Soft Field has no texture or gradient wash. ── */
 .grain,
@@ -103,7 +85,7 @@ body { cursor: none; }
 .nav {
   position: fixed; top: 14px; left: 50%; transform: translateX(-50%);
   z-index: 100; width: calc(100% - clamp(24px, 5vw, 64px));
-  max-width: 1160px; height: 64px;
+  max-width: 1320px; height: 64px;
   padding: 0 12px 0 26px;
   display: flex; align-items: center; justify-content: space-between;
   background: rgba(16, 16, 20, .72);
@@ -145,7 +127,7 @@ body { cursor: none; }
 .hero-inner {
   display: grid; grid-template-columns: 1fr auto;
   gap: clamp(40px, 6vw, 96px); align-items: center;
-  width: 100%; max-width: 1160px; margin: 0 auto;
+  width: 100%; max-width: 1320px; margin: 0 auto;
 }
 .hero-eyebrow {
   display: inline-flex; align-items: center; gap: 10px;
@@ -270,7 +252,7 @@ body { cursor: none; }
 .stats { position: relative; z-index: 1; padding: 8px clamp(24px, 5vw, 80px) 0; }
 .stats-grid {
   display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;
-  max-width: 1160px; margin: 0 auto; background: none;
+  max-width: 1320px; margin: 0 auto; background: none;
 }
 .stat-cell {
   background: var(--blue-field); border-radius: var(--r);
@@ -286,8 +268,11 @@ body { cursor: none; }
 .stat-lbl { font-size: 13px; color: var(--blue-txt); letter-spacing: .1em; text-transform: uppercase; }
 .stat-cell:nth-child(3n + 2) .stat-lbl { color: #b79fca; }
 
+/* ── Full-page scroll sections ── */
+.page { scroll-snap-align: start; min-height: 100vh; }
+
 /* ── Section shared ── */
-.container { max-width: 1160px; margin: 0 auto; padding: 0 clamp(24px, 5vw, 80px); }
+.container { max-width: 1320px; margin: 0 auto; padding: 0 clamp(24px, 5vw, 80px); }
 .sec-head { margin-bottom: 48px; max-width: 68ch; }
 .sec-label {
   display: flex; align-items: center; gap: 10px;
@@ -304,6 +289,7 @@ body { cursor: none; }
 /* ── Projects — soft plates ── */
 .projects { padding: 112px 0; position: relative; z-index: 1; }
 .projects-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.pcard-link { display: block; text-decoration: none; color: inherit; }
 .pcard {
   background: var(--bg1); border: 1px solid var(--bord);
   border-radius: var(--r); padding: 26px;
@@ -420,6 +406,31 @@ body { cursor: none; }
   display: flex; justify-content: space-between; align-items: center;
   font-size: 14px; color: var(--txt3); flex-wrap: wrap; gap: 8px;
 }
+
+/* ── Project detail pages ── */
+.proj-page { padding: 152px 0 40px; }
+.proj-back {
+  display: inline-flex; align-items: center;
+  padding: 10px 20px !important; font-size: 14px !important;
+  margin-bottom: 32px;
+}
+.proj-title {
+  font-family: var(--font-newsreader), Georgia, serif;
+  font-size: clamp(38px, 5.2vw, 64px); font-weight: 500;
+  letter-spacing: -.03em; line-height: 1.05;
+  color: var(--paper); margin: 20px 0 10px;
+}
+.proj-desc {
+  font-size: 18px; line-height: 1.7; color: var(--txt2);
+  max-width: 70ch; margin: 14px 0 26px;
+}
+.proj-placeholder {
+  margin-top: 48px; border: 1px dashed var(--bord2);
+  border-radius: var(--r); padding: clamp(28px, 4vw, 48px);
+  text-align: center;
+}
+.proj-placeholder p { color: var(--txt3); font-size: 16px; }
+.proj-foot { padding: 0 0 96px; }
 
 /* ── Reflection ── */
 .reflection { padding: 112px 0; position: relative; z-index: 1; }

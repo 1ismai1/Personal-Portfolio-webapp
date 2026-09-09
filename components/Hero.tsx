@@ -2,7 +2,7 @@ import Image from 'next/image'
 
 export default function Hero() {
   return (
-    <section className="hero" aria-label="Introduction">
+    <div className="hero">
       <div className="hero-inner">
         <div>
           <div className="hero-eyebrow" aria-hidden="true">
@@ -48,6 +48,6 @@ export default function Hero() {
         <span>Scroll</span>
         <div className="scroll-bar" />
       </div>
-    </section>
+    </div>
   )
 }
