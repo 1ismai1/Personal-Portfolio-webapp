@@ -5,7 +5,7 @@ import { projects } from './projectsData'
 
 export default function Projects() {
   return (
-    <section id="projects" className="projects page" aria-labelledby="proj-title">
+    <section className="projects" aria-labelledby="proj-title">
       <div className="container">
         <Reveal className="sec-head">
           <div className="sec-label">Selected Work</div>

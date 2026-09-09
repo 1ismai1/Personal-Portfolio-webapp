@@ -56,7 +56,7 @@
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-html { scroll-behavior: smooth; scroll-snap-type: y mandatory; }
+html { scroll-behavior: smooth; }
 
 body {
   background: var(--bg);
@@ -248,28 +248,34 @@ body {
   animation: breathe 2.2s ease-in-out infinite;
 }
 
-/* ── Stats — spec plate ── */
-.stats { position: relative; z-index: 1; padding: 8px clamp(24px, 5vw, 80px) 0; }
-.stats-grid {
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;
-  max-width: 1320px; margin: 0 auto; background: none;
-}
-.stat-cell {
-  background: var(--blue-field); border-radius: var(--r);
-  padding: 44px 32px; text-align: left;
-}
-.stat-cell:nth-child(3n + 2) { background: var(--aub-field); }
-.stat-num {
-  font-family: var(--font-newsreader), Georgia, serif;
-  font-size: clamp(44px, 5.6vw, 68px); font-weight: 400;
-  line-height: 1; letter-spacing: -.035em; color: var(--paper); margin-bottom: 10px;
-}
-.stat-num em { color: var(--paper); font-style: normal; }
-.stat-lbl { font-size: 13px; color: var(--blue-txt); letter-spacing: .1em; text-transform: uppercase; }
-.stat-cell:nth-child(3n + 2) .stat-lbl { color: #b79fca; }
+/* ── Full-page scroll sections ──
+   Desktop/laptop: .paged-viewport clips to one viewport tall, .paged-track
+   is the 4-page flex column PagedHome.tsx slides with a transform, and each
+   .page is itself a fixed-height scroll container (so oversized page
+   content scrolls internally without breaking the page-to-page transition).
+   Below 900px this all reverts to plain stacked, normally-scrolling sections. */
+.paged-track { display: flex; flex-direction: column; }
+.page { width: 100%; }
 
-/* ── Full-page scroll sections ── */
-.page { scroll-snap-align: start; min-height: 100vh; }
+@media (min-width: 900px) {
+  .paged-viewport { height: 100vh; overflow: hidden; }
+  .paged-track {
+    transition: transform .7s cubic-bezier(.65, 0, .35, 1);
+    will-change: transform;
+  }
+  .page {
+    height: 100vh; flex: 0 0 100vh; overflow-y: auto;
+    display: flex; flex-direction: column;
+    scrollbar-width: none; -ms-overflow-style: none;
+  }
+  .page::-webkit-scrollbar { display: none; }
+  /* Center each page's content when it's shorter than the viewport; if it's
+     ever taller, margin:auto collapses to 0 and it aligns/scrolls from the top. */
+  .page > * { margin-top: auto; margin-bottom: auto; }
+}
+@media (max-width: 899px) {
+  .page { min-height: 100vh; }
+}
 
 /* ── Section shared ── */
 .container { max-width: 1320px; margin: 0 auto; padding: 0 clamp(24px, 5vw, 80px); }
@@ -517,7 +523,6 @@ body {
   .photo-side    { display: flex; justify-content: center; }
   .projects-grid { grid-template-columns: 1fr; }
   .skills-cols   { grid-template-columns: 1fr 1fr; }
-  .stats-grid    { grid-template-columns: 1fr; }
   .refl-step     { grid-template-columns: 1fr; gap: 14px; }
 }
 @media (max-width: 600px) {
@@ -526,5 +531,4 @@ body {
   .nav-links a:not(.nav-cta) { display: none; }
   .skills-cols { grid-template-columns: 1fr; }
   .foot-row { flex-direction: column; text-align: center; }
-  .stat-cell { padding: 32px 24px; }
 }

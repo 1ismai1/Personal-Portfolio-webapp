@@ -22,13 +22,13 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    slug: 'baraka-circle',
-    badge: <><StarIcon />1st Place — Fintech</>,
-    badgeClass: 'badge-gold',
-    title: 'Baraka Circle',
-    sub: 'Ummah Hack · SvelteKit + Firebase',
-    desc: 'An interest-free alternative to traditional loans — groups form rotating savings circles coordinated through a real-time Firebase backend. Integrated Ethereum smart contracts to record and confirm transactions on-chain, delivering a fully functional fintech product under hackathon time pressure.',
-    stack: ['SvelteKit', 'Firebase', 'Ethereum', 'Smart Contracts'],
+    slug: 'end-effector',
+    badge: <><GearIcon />Engineering Design</>,
+    badgeClass: 'badge-aub',
+    title: 'Q-Arm End Effector',
+    sub: 'ENG 1P13 P1 · CAD + Python',
+    desc: 'A modular end effector engineered for McMaster’s Q-Arm robotic platform, built to scan, grip, and sort warehouse parcels of different shapes, sizes, and weights. Our team combined a rack-and-pinion arm for flat-edged objects with a ball-and-socket concave disc for irregular ones, all inside a fully 3D-printed assembly under 100 grams. I wrote the Python control code that drove the arm through its full pick, scan, and pack sequence.',
+    stack: ['CAD', 'Python', 'Rack & Pinion', 'Q-Arm Robotics', 'Prototyping'],
   },
   {
     slug: 'safepulse',
@@ -45,7 +45,7 @@ export const projects: Project[] = [
     badgeClass: 'badge-eng',
     title: 'Exo Arm',
     sub: 'ENG 1P13 P3 · PLA + CAD Modelling',
-    desc: 'A 3D-printed forearm-mounted assistive device for Mark, a 64-year-old client with Juvenile Rheumatoid Arthritis. A male-female connector system lets users hold everyday objects without grip strength. Designed within a $100 budget and 20-hour print limit — achieving ≥ 4/5 comfort ratings across 10+ testers.',
+    desc: 'A 3D-printed forearm-mounted assistive device for Mark, a 64-year-old client with Juvenile Rheumatoid Arthritis. A male-female connector system lets users hold everyday objects without needing grip strength. We designed it within a $100 budget and a 20-hour print limit, and it earned 4 out of 5 or better comfort ratings from more than 10 testers.',
     stack: ['CAD', '3D Printing', 'PLA', 'Iterative Design', 'User Testing'],
   },
 ]

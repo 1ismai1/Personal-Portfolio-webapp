@@ -14,7 +14,7 @@ const GitHubIcon = () => (
 
 export default function Contact() {
   return (
-    <section id="contact" className="contact page" aria-labelledby="contact-title">
+    <section className="contact" aria-labelledby="contact-title">
       <div className="container">
         <Reveal>
           <div className="sec-label">Let&apos;s Connect</div>

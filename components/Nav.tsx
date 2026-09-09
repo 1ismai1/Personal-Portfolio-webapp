@@ -6,10 +6,16 @@ export default function Nav() {
   const navRef = useRef<HTMLElement>(null)
 
   useEffect(() => {
-    const onScroll = () =>
-      navRef.current?.classList.toggle('scrolled', window.scrollY > 24)
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
+    // Scroll events don't bubble, but a capturing listener on window still
+    // sees them fire on nested scroll containers (each .page on desktop) —
+    // this covers both that case and plain document scroll (mobile, project pages).
+    const onScroll = (e: Event) => {
+      const target = e.target as Document | HTMLElement
+      const scrollTop = target instanceof Document ? window.scrollY : target.scrollTop
+      navRef.current?.classList.toggle('scrolled', scrollTop > 24)
+    }
+    window.addEventListener('scroll', onScroll, { passive: true, capture: true })
+    return () => window.removeEventListener('scroll', onScroll, true)
   }, [])
 
   useEffect(() => {

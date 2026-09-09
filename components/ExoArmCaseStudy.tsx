@@ -9,10 +9,10 @@ export default function ExoArmCaseStudy() {
         <Reveal className="refl-intro">
           <div className="refl-intro-text">
             <p>
-              For Design Project 3, our team built the <strong style={{ color: 'var(--txt)', fontWeight: 500 }}>Exo Arm</strong> — a 3D-printed forearm-mounted assistive device for Mark, a 64-year-old client living with Juvenile Rheumatoid Arthritis. The device uses a male-female connector system so Mark can hold cups, utensils, and other everyday objects without grip strength.
+              For Design Project 3, our team built the <strong style={{ color: 'var(--txt)', fontWeight: 500 }}>Exo Arm</strong>, a 3D-printed forearm-mounted assistive device for Mark, a 64-year-old client living with Juvenile Rheumatoid Arthritis. It uses a male-female connector system so he can hold cups, utensils, and other everyday objects without needing grip strength.
             </p>
             <p>
-              This reflection traces a single pivotal moment in Week 8 that changed how I think about testing — and ultimately made the device better.
+              This reflection is about one moment in Week 8 that changed how I think about testing, and ended up making the device better too.
             </p>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px', marginTop: '24px' }}>
               {['3D Printing / PLA', 'CAD Modelling', 'Iterative Design', 'User Testing', 'Jan 5 – Apr 3, 2026'].map(tag => (
@@ -22,14 +22,14 @@ export default function ExoArmCaseStudy() {
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
             <div className="refl-device-img">
-              <Image src="/Exo-arm-main.png" alt="Final Exo Arm — 3D-printed blue PLA forearm frame with Velcro straps" fill style={{ objectFit: 'cover', filter: 'grayscale(10%) contrast(1.06)' }} />
+              <Image src="/Exo-arm-main.png" alt="Final Exo Arm, a 3D-printed blue PLA forearm frame with Velcro straps" fill style={{ objectFit: 'cover', filter: 'grayscale(10%) contrast(1.06)' }} />
               <div className="img-overlay" aria-hidden="true" />
-              <div className="refl-device-cap">Final Design — 3D-printed PLA frame with Velcro straps &amp; connector system</div>
+              <div className="refl-device-cap">Final design: 3D-printed PLA frame with Velcro straps and connector system</div>
             </div>
             <div className="refl-device-img">
-              <Image src="/Exo-arm-attachments.png" alt="Connector attachments — red, blue and white twist-on clips" fill style={{ objectFit: 'cover', filter: 'grayscale(10%) contrast(1.06)' }} />
+              <Image src="/Exo-arm-attachments.png" alt="Connector attachments: red, blue, and white twist-on clips" fill style={{ objectFit: 'cover', filter: 'grayscale(10%) contrast(1.06)' }} />
               <div className="img-overlay" aria-hidden="true" />
-              <div className="refl-device-cap">Connector Attachments — twist-on clip system for everyday objects</div>
+              <div className="refl-device-cap">Connector attachments: a twist-on clip system for everyday objects</div>
             </div>
           </div>
         </Reveal>
@@ -46,13 +46,13 @@ export default function ExoArmCaseStudy() {
             <div>
               <h3 className="refl-step-q">The chopstick problem</h3>
               <p>
-                It was Week 8, Design Studio, and we had a problem. Mark lives with Juvenile Rheumatoid Arthritis — a chronic condition where joint inflammation steadily strips away grip strength and fine motor control — and he could not be present for every testing session. So we had to simulate his limitations ourselves.
+                It was Week 8, Design Studio, and we hit a snag. Mark lives with Juvenile Rheumatoid Arthritis, a chronic condition where joint inflammation gradually takes away grip strength and fine motor control, and he couldn&apos;t make it to every testing session. So we had to figure out how to simulate his limitations ourselves.
               </p>
               <p>
                 Our first idea was chopsticks wedged between our fingers to block hand closure. It felt logical. But the moment we actually tried it, something was wrong: the chopsticks slid around, every teammate held them at a different angle, and there was none of the actual resistance or stiffness that damaged joints produce. The results between testers were all over the place.
               </p>
               <div className="refl-pullquote">
-                <p>&ldquo;We threw out that method entirely and switched to tapping our fingertips firmly against our palms before each trial — mimicking the reduced range of motion and grip strength Mark experiences day to day.&rdquo;</p>
+                <p>&ldquo;We threw out that method entirely and switched to tapping our fingertips firmly against our palms before each trial, which mimicked the reduced range of motion and grip strength Mark deals with every day.&rdquo;</p>
               </div>
               <p>
                 Suddenly the data was consistent. Suddenly the device&apos;s real weaknesses became visible. It was a small change that quietly changed everything about how we understood our own design.
@@ -75,7 +75,7 @@ export default function ExoArmCaseStudy() {
                 On the positive side, catching the flaw before Milestone 6 meant we still had time to fix it. The fingertip-tapping method worked, the revised data was consistent, and the design changes we made based on it genuinely improved the device. But I kept thinking about how close we came to presenting results built on a broken foundation.
               </p>
               <div className="refl-pullquote">
-                <p>&ldquo;What changed for me was how I now think about testing itself. The simulation method is a design decision — one that shapes every number that comes after it.&rdquo;</p>
+                <p>&ldquo;What changed for me was how I think about testing now. The simulation method is a design decision, and it shapes every number that comes after it.&rdquo;</p>
               </div>
               <p>
                 I used to treat the test as something that happens after the design decisions. This experience forced me to see that if nobody questions it early, nobody questions it at all. Below are the scores testers gave after we modified the device based on the corrected fingertip-tapping results.
@@ -114,7 +114,7 @@ export default function ExoArmCaseStudy() {
                 <div className="chart-card">
                   <div className="chart-title">Comfortability Scores by Weight</div>
                   <div className="chart-svg-wrap">
-                    <svg viewBox="0 0 300 180" width="100%" aria-label="Bar chart: comfortability scores. 1kg — score 10: 3, score 9: 3, score 8: 1. 2kg — score 10: 1, score 9: 3, score 8: 2, score 7: 1">
+                    <svg viewBox="0 0 300 180" width="100%" aria-label="Bar chart: comfortability scores. At 1kg, score 10: 3 people, score 9: 3 people, score 8: 1 person. At 2kg, score 10: 1 person, score 9: 3 people, score 8: 2 people, score 7: 1 person.">
                       <line x1="40" y1="20"  x2="280" y2="20"  stroke="rgba(246,244,241,.07)" strokeWidth="1"/>
                       <line x1="40" y1="57"  x2="280" y2="57"  stroke="rgba(246,244,241,.07)" strokeWidth="1"/>
                       <line x1="40" y1="94"  x2="280" y2="94"  stroke="rgba(246,244,241,.07)" strokeWidth="1"/>
@@ -156,7 +156,7 @@ export default function ExoArmCaseStudy() {
             <div>
               <h3 className="refl-step-q">Validate the method before the test</h3>
               <p>
-                What I learned is that a simulation method is not a formality. It is a design decision, and it needs to be treated like one. Getting it wrong does not just produce bad numbers — it produces bad design choices that feel justified because the data said so.
+                What I learned is that a simulation method isn&apos;t just a formality. It&apos;s a design decision, and it needs to be treated like one. Getting it wrong doesn&apos;t just produce bad numbers, it produces bad design choices that feel justified because the data backed them up.
               </p>
               <p>
                 In engineering, we are often designing for people who cannot easily tell us when something is wrong. If our testing method fails to represent them accurately, the whole process quietly drifts away from the actual problem.
@@ -165,7 +165,7 @@ export default function ExoArmCaseStudy() {
                 <p>&ldquo;Going forward, before I run a single test, I want to ask: can this method consistently replicate the condition being studied? Has anyone challenged the assumptions behind it?&rdquo;</p>
               </div>
               <p>
-                For the next group project I work on, that question gets asked at the start — not after the data already looks suspicious.
+                For the next group project I work on, that question gets asked at the start, not after the data already looks suspicious.
               </p>
             </div>
           </Reveal>
