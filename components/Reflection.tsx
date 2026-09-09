@@ -95,24 +95,24 @@ export default function Reflection() {
                   <div className="chart-title">User Independence Scores</div>
                   <div className="chart-svg-wrap">
                     <svg viewBox="0 0 300 180" width="100%" aria-label="Bar chart: user independence scores. Score 10: 1 person, 9: 1 person, 8: 3 people, 7: 2 people">
-                      <line x1="40" y1="20"  x2="280" y2="20"  stroke="rgba(237,232,224,.07)" strokeWidth="1"/>
-                      <line x1="40" y1="57"  x2="280" y2="57"  stroke="rgba(237,232,224,.07)" strokeWidth="1"/>
-                      <line x1="40" y1="94"  x2="280" y2="94"  stroke="rgba(237,232,224,.07)" strokeWidth="1"/>
-                      <line x1="40" y1="131" x2="280" y2="131" stroke="rgba(237,232,224,.07)" strokeWidth="1"/>
-                      <text x="34" y="24"  fill="#5a5450" fontSize="9" textAnchor="end" fontFamily="DM Sans, sans-serif">3</text>
-                      <text x="34" y="61"  fill="#5a5450" fontSize="9" textAnchor="end" fontFamily="DM Sans, sans-serif">2</text>
-                      <text x="34" y="98"  fill="#5a5450" fontSize="9" textAnchor="end" fontFamily="DM Sans, sans-serif">1</text>
-                      <text x="34" y="135" fill="#5a5450" fontSize="9" textAnchor="end" fontFamily="DM Sans, sans-serif">0</text>
-                      <rect x="55"  y="94"  width="28" height="37"  rx="3" fill="rgba(224,147,64,.75)"/>
-                      <rect x="105" y="94"  width="28" height="37"  rx="3" fill="rgba(224,147,64,.75)"/>
-                      <rect x="155" y="20"  width="28" height="111" rx="3" fill="rgba(224,147,64,.75)"/>
-                      <rect x="205" y="57"  width="28" height="74"  rx="3" fill="rgba(224,147,64,.75)"/>
-                      <text x="69"  y="148" fill="#5a5450" fontSize="9" textAnchor="middle" fontFamily="DM Sans, sans-serif">10</text>
-                      <text x="119" y="148" fill="#5a5450" fontSize="9" textAnchor="middle" fontFamily="DM Sans, sans-serif">9</text>
-                      <text x="169" y="148" fill="#5a5450" fontSize="9" textAnchor="middle" fontFamily="DM Sans, sans-serif">8</text>
-                      <text x="219" y="148" fill="#5a5450" fontSize="9" textAnchor="middle" fontFamily="DM Sans, sans-serif">7</text>
-                      <line x1="40" y1="131" x2="280" y2="131" stroke="rgba(237,232,224,.18)" strokeWidth="1"/>
-                      <text x="160" y="166" fill="#5a5450" fontSize="9" textAnchor="middle" fontFamily="DM Sans, sans-serif" letterSpacing=".08em">SCORE (out of 10)</text>
+                      <line x1="40" y1="20"  x2="280" y2="20"  stroke="rgba(246,244,241,.07)" strokeWidth="1"/>
+                      <line x1="40" y1="57"  x2="280" y2="57"  stroke="rgba(246,244,241,.07)" strokeWidth="1"/>
+                      <line x1="40" y1="94"  x2="280" y2="94"  stroke="rgba(246,244,241,.07)" strokeWidth="1"/>
+                      <line x1="40" y1="131" x2="280" y2="131" stroke="rgba(246,244,241,.07)" strokeWidth="1"/>
+                      <text x="34" y="24"  fill="#8b8986" fontSize="9" textAnchor="end" fontFamily="Figtree, sans-serif">3</text>
+                      <text x="34" y="61"  fill="#8b8986" fontSize="9" textAnchor="end" fontFamily="Figtree, sans-serif">2</text>
+                      <text x="34" y="98"  fill="#8b8986" fontSize="9" textAnchor="end" fontFamily="Figtree, sans-serif">1</text>
+                      <text x="34" y="135" fill="#8b8986" fontSize="9" textAnchor="end" fontFamily="Figtree, sans-serif">0</text>
+                      <rect x="55"  y="94"  width="28" height="37"  rx="3" fill="rgba(201,176,218,.85)"/>
+                      <rect x="105" y="94"  width="28" height="37"  rx="3" fill="rgba(201,176,218,.85)"/>
+                      <rect x="155" y="20"  width="28" height="111" rx="3" fill="rgba(201,176,218,.85)"/>
+                      <rect x="205" y="57"  width="28" height="74"  rx="3" fill="rgba(201,176,218,.85)"/>
+                      <text x="69"  y="148" fill="#8b8986" fontSize="9" textAnchor="middle" fontFamily="Figtree, sans-serif">10</text>
+                      <text x="119" y="148" fill="#8b8986" fontSize="9" textAnchor="middle" fontFamily="Figtree, sans-serif">9</text>
+                      <text x="169" y="148" fill="#8b8986" fontSize="9" textAnchor="middle" fontFamily="Figtree, sans-serif">8</text>
+                      <text x="219" y="148" fill="#8b8986" fontSize="9" textAnchor="middle" fontFamily="Figtree, sans-serif">7</text>
+                      <line x1="40" y1="131" x2="280" y2="131" stroke="rgba(246,244,241,.18)" strokeWidth="1"/>
+                      <text x="160" y="166" fill="#8b8986" fontSize="9" textAnchor="middle" fontFamily="Figtree, sans-serif" letterSpacing=".08em">SCORE (out of 10)</text>
                     </svg>
                   </div>
                 </div>
@@ -122,32 +122,32 @@ export default function Reflection() {
                   <div className="chart-title">Comfortability Scores by Weight</div>
                   <div className="chart-svg-wrap">
                     <svg viewBox="0 0 300 180" width="100%" aria-label="Bar chart: comfortability scores. 1kg — score 10: 3, score 9: 3, score 8: 1. 2kg — score 10: 1, score 9: 3, score 8: 2, score 7: 1">
-                      <line x1="40" y1="20"  x2="280" y2="20"  stroke="rgba(237,232,224,.07)" strokeWidth="1"/>
-                      <line x1="40" y1="57"  x2="280" y2="57"  stroke="rgba(237,232,224,.07)" strokeWidth="1"/>
-                      <line x1="40" y1="94"  x2="280" y2="94"  stroke="rgba(237,232,224,.07)" strokeWidth="1"/>
-                      <line x1="40" y1="131" x2="280" y2="131" stroke="rgba(237,232,224,.07)" strokeWidth="1"/>
-                      <text x="34" y="24"  fill="#5a5450" fontSize="9" textAnchor="end" fontFamily="DM Sans, sans-serif">3</text>
-                      <text x="34" y="61"  fill="#5a5450" fontSize="9" textAnchor="end" fontFamily="DM Sans, sans-serif">2</text>
-                      <text x="34" y="98"  fill="#5a5450" fontSize="9" textAnchor="end" fontFamily="DM Sans, sans-serif">1</text>
-                      <text x="34" y="135" fill="#5a5450" fontSize="9" textAnchor="end" fontFamily="DM Sans, sans-serif">0</text>
-                      <rect x="50"  y="20"  width="16" height="111" rx="2" fill="rgba(224,147,64,.8)"/>
-                      <rect x="68"  y="94"  width="16" height="37"  rx="2" fill="rgba(192,69,42,.7)"/>
-                      <rect x="100" y="20"  width="16" height="111" rx="2" fill="rgba(224,147,64,.8)"/>
-                      <rect x="118" y="20"  width="16" height="111" rx="2" fill="rgba(192,69,42,.7)"/>
-                      <rect x="150" y="94"  width="16" height="37"  rx="2" fill="rgba(224,147,64,.8)"/>
-                      <rect x="168" y="57"  width="16" height="74"  rx="2" fill="rgba(192,69,42,.7)"/>
-                      <rect x="218" y="94"  width="16" height="37"  rx="2" fill="rgba(192,69,42,.7)"/>
-                      <text x="67"  y="148" fill="#5a5450" fontSize="9" textAnchor="middle" fontFamily="DM Sans, sans-serif">10</text>
-                      <text x="117" y="148" fill="#5a5450" fontSize="9" textAnchor="middle" fontFamily="DM Sans, sans-serif">9</text>
-                      <text x="167" y="148" fill="#5a5450" fontSize="9" textAnchor="middle" fontFamily="DM Sans, sans-serif">8</text>
-                      <text x="217" y="148" fill="#5a5450" fontSize="9" textAnchor="middle" fontFamily="DM Sans, sans-serif">7</text>
-                      <line x1="40" y1="131" x2="280" y2="131" stroke="rgba(237,232,224,.18)" strokeWidth="1"/>
-                      <text x="160" y="166" fill="#5a5450" fontSize="9" textAnchor="middle" fontFamily="DM Sans, sans-serif" letterSpacing=".08em">SCORE (out of 10)</text>
+                      <line x1="40" y1="20"  x2="280" y2="20"  stroke="rgba(246,244,241,.07)" strokeWidth="1"/>
+                      <line x1="40" y1="57"  x2="280" y2="57"  stroke="rgba(246,244,241,.07)" strokeWidth="1"/>
+                      <line x1="40" y1="94"  x2="280" y2="94"  stroke="rgba(246,244,241,.07)" strokeWidth="1"/>
+                      <line x1="40" y1="131" x2="280" y2="131" stroke="rgba(246,244,241,.07)" strokeWidth="1"/>
+                      <text x="34" y="24"  fill="#8b8986" fontSize="9" textAnchor="end" fontFamily="Figtree, sans-serif">3</text>
+                      <text x="34" y="61"  fill="#8b8986" fontSize="9" textAnchor="end" fontFamily="Figtree, sans-serif">2</text>
+                      <text x="34" y="98"  fill="#8b8986" fontSize="9" textAnchor="end" fontFamily="Figtree, sans-serif">1</text>
+                      <text x="34" y="135" fill="#8b8986" fontSize="9" textAnchor="end" fontFamily="Figtree, sans-serif">0</text>
+                      <rect x="50"  y="20"  width="16" height="111" rx="2" fill="rgba(201,176,218,.85)"/>
+                      <rect x="68"  y="94"  width="16" height="37"  rx="2" fill="rgba(157,179,199,.75)"/>
+                      <rect x="100" y="20"  width="16" height="111" rx="2" fill="rgba(201,176,218,.85)"/>
+                      <rect x="118" y="20"  width="16" height="111" rx="2" fill="rgba(157,179,199,.75)"/>
+                      <rect x="150" y="94"  width="16" height="37"  rx="2" fill="rgba(201,176,218,.85)"/>
+                      <rect x="168" y="57"  width="16" height="74"  rx="2" fill="rgba(157,179,199,.75)"/>
+                      <rect x="218" y="94"  width="16" height="37"  rx="2" fill="rgba(157,179,199,.75)"/>
+                      <text x="67"  y="148" fill="#8b8986" fontSize="9" textAnchor="middle" fontFamily="Figtree, sans-serif">10</text>
+                      <text x="117" y="148" fill="#8b8986" fontSize="9" textAnchor="middle" fontFamily="Figtree, sans-serif">9</text>
+                      <text x="167" y="148" fill="#8b8986" fontSize="9" textAnchor="middle" fontFamily="Figtree, sans-serif">8</text>
+                      <text x="217" y="148" fill="#8b8986" fontSize="9" textAnchor="middle" fontFamily="Figtree, sans-serif">7</text>
+                      <line x1="40" y1="131" x2="280" y2="131" stroke="rgba(246,244,241,.18)" strokeWidth="1"/>
+                      <text x="160" y="166" fill="#8b8986" fontSize="9" textAnchor="middle" fontFamily="Figtree, sans-serif" letterSpacing=".08em">SCORE (out of 10)</text>
                     </svg>
                   </div>
                   <div className="chart-legend">
-                    <div className="legend-item"><div className="legend-dot" style={{ background: 'rgba(224,147,64,.8)' }} />1 kg</div>
-                    <div className="legend-item"><div className="legend-dot" style={{ background: 'rgba(192,69,42,.7)' }} />2 kg</div>
+                    <div className="legend-item"><div className="legend-dot" style={{ background: 'rgba(201,176,218,.85)' }} />1 kg</div>
+                    <div className="legend-item"><div className="legend-dot" style={{ background: 'rgba(157,179,199,.75)' }} />2 kg</div>
                   </div>
                 </div>
               </div>

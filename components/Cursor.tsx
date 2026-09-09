@@ -27,12 +27,12 @@ export default function Cursor() {
     const expand = () => {
       cur.style.width  = '11px'; cur.style.height = '11px'
       ring.style.width = '42px'; ring.style.height = '42px'
-      ring.style.borderColor = 'rgba(224,147,64,.7)'
+      ring.style.borderColor = 'rgba(201,176,218,.7)'
     }
     const shrink = () => {
       cur.style.width  = '7px';  cur.style.height = '7px'
       ring.style.width = '30px'; ring.style.height = '30px'
-      ring.style.borderColor = 'rgba(224,147,64,.45)'
+      ring.style.borderColor = 'rgba(201,176,218,.38)'
     }
     document.querySelectorAll('a, button').forEach(el => {
       el.addEventListener('mouseenter', expand)

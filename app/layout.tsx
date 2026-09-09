@@ -1,21 +1,20 @@
 import type { Metadata } from 'next'
-import { Cormorant_Garamond, DM_Sans } from 'next/font/google'
+import { Newsreader, Figtree } from 'next/font/google'
 import './globals.css'
 import Cursor from '@/components/Cursor'
 import Nav from '@/components/Nav'
 
-const cormorant = Cormorant_Garamond({
+const newsreader = Newsreader({
   subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700'],
-  style: ['normal', 'italic'],
-  variable: '--font-cormorant',
+  weight: ['400', '500', '600'],
+  variable: '--font-newsreader',
   display: 'swap',
 })
 
-const dmSans = DM_Sans({
+const figtree = Figtree({
   subsets: ['latin'],
   weight: ['300', '400', '500', '600'],
-  variable: '--font-dm-sans',
+  variable: '--font-figtree',
   display: 'swap',
 })
 
@@ -27,8 +26,9 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${cormorant.variable} ${dmSans.variable}`}>
+    <html lang="en" className={`${newsreader.variable} ${figtree.variable}`}>
       <body>
+        {/* .grain and .ambient are display:none in Soft Field — safe to delete these two lines */}
         <div className="grain" aria-hidden="true" />
         <div className="ambient" aria-hidden="true" />
         <Cursor />
