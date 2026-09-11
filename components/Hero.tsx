@@ -13,9 +13,9 @@ export default function Hero() {
             <span className="name-line2">Ahmed</span>
           </h1>
           <p className="hero-desc">
-            First-year engineering student building things that matter — from AI civic platforms
-            to wearable assistive devices. 3.9&nbsp;GPA. 2× hackathon winner.
-            Seeking a software engineering internship.
+            First-year engineering student building things that matter — from bare-metal firmware
+            to wearable assistive devices. 3.9&nbsp;GPA. Hackathon winner.
+            Seeking a firmware, hardware, or software engineering internship.
           </p>
           <div className="hero-actions">
             <a href="#projects" className="btn-primary">View Projects</a>

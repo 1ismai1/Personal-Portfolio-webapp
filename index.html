@@ -563,7 +563,7 @@
           <span class="name-line2">Ahmed</span>
         </h1>
         <p class="hero-desc">
-          First-year engineering student building things that matter — from AI civic platforms to wearable assistive devices. 3.9&nbsp;GPA. 2× hackathon winner. Seeking a software engineering internship.
+          First-year engineering student building things that matter — from bare-metal firmware to wearable assistive devices. 3.9&nbsp;GPA. Hackathon winner. Seeking a firmware, hardware, or software engineering internship.
         </p>
         <div class="hero-actions">
           <a href="#projects" class="btn-primary">View Projects</a>
@@ -603,12 +603,12 @@
           <div class="stat-lbl">GPA at McMaster</div>
         </div>
         <div class="stat-cell">
-          <div class="stat-num">2<em>×</em></div>
+          <div class="stat-num">1<em>×</em></div>
           <div class="stat-lbl">Hackathon Winner</div>
         </div>
         <div class="stat-cell">
-          <div class="stat-num">63<em>+</em></div>
-          <div class="stat-lbl">Teams Outranked</div>
+          <div class="stat-num">100<em>Hz</em></div>
+          <div class="stat-lbl">IMU Sample Rate</div>
         </div>
       </div>
     </div>
@@ -643,23 +643,23 @@
           </div>
         </article>
 
-        <!-- SafePulse -->
+        <!-- IMU Logger -->
         <article class="pcard reveal d2">
-          <div class="pbadge badge-silver" aria-label="Award: 2nd Place out of 63 teams">
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-            2nd / 63 Teams — Mac-a-Thon
+          <div class="pbadge badge-silver" aria-label="7.8 milliamp sleep-mode power draw">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
+            7.8 mA Sleep Draw
           </div>
-          <h3 class="ptitle">SafePulse</h3>
-          <div class="psub">Mac-a-Thon 2026 &nbsp;·&nbsp; Next.js + Gemini API</div>
+          <h3 class="ptitle">IMU Logger</h3>
+          <div class="psub">STM32F4 Bare-Metal Firmware &nbsp;·&nbsp; C + FreeRTOS + DMA</div>
           <p class="pdesc">
-            An AI-powered civic reporting platform converting voice and photo input into structured, city-ready 311 reports aligned with real City of Hamilton standards. Features a fully voice-navigable UI and a live heatmapped neighbourhood map for hands-free, real-time community issue reporting.
+            Register-level bare-metal firmware for an STM32F4 — no HAL — with hand-written drivers for GPIO, I2C, SPI, UART, and timers. Reads a 6-axis IMU at 100 Hz over DMA and fuses orientation with a complementary filter, while FreeRTOS tasks split acquisition, filtering, and SD-card logging across queues with a ring buffer to prevent dropped samples. Verified bus timing and interrupt latency on a logic analyzer, with sleep-mode draw measured at 7.8 mA.
           </p>
           <div class="pstack">
-            <span class="ttag">Next.js</span>
-            <span class="ttag">Firebase</span>
-            <span class="ttag">Gemini API</span>
-            <span class="ttag">Voice UI</span>
-            <span class="ttag">Maps</span>
+            <span class="ttag">C</span>
+            <span class="ttag">STM32F4</span>
+            <span class="ttag">FreeRTOS</span>
+            <span class="ttag">DMA</span>
+            <span class="ttag">SPI/I2C</span>
           </div>
         </article>
 
