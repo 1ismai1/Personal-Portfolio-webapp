@@ -14,7 +14,7 @@ export default function Hero() {
           </h1>
           <p className="hero-desc">
             First-year engineering student building things that matter — from bare-metal firmware
-            to wearable assistive devices. 3.9&nbsp;GPA. Hackathon winner.
+            to wearable assistive devices. 3.9&nbsp;GPA. Competed at DECA Provincials.
             Seeking a firmware, hardware, or software engineering internship.
           </p>
           <div className="hero-actions">
