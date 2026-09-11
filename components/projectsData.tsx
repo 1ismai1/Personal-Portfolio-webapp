@@ -48,4 +48,13 @@ export const projects: Project[] = [
     desc: 'A 3D-printed forearm-mounted assistive device for Mark, a 64-year-old client with Juvenile Rheumatoid Arthritis. A male-female connector system lets users hold everyday objects without needing grip strength. We designed it within a $100 budget and a 20-hour print limit, and it earned 4 out of 5 or better comfort ratings from more than 10 testers.',
     stack: ['CAD', '3D Printing', 'PLA', 'Iterative Design', 'User Testing'],
   },
+  {
+    slug: 'disillusionary-tale',
+    badge: <><StarIcon />Personal Project</>,
+    badgeClass: 'badge-gold',
+    title: 'Disillusionary Tale',
+    sub: 'Fantasy RPG · Unreal Engine 5',
+    desc: 'A fantasy RPG built around a hidden trust system: three story beats quietly accumulate a TrustLevel that locks the player into one of two endings, biased through writing psychology rather than point-tuning. Dialogue, reputation, saving, and a parry-based combat loop all run on the same data-driven Unreal Engine 5 architecture, so one reusable system does the work instead of one-off logic per scene.',
+    stack: ['Unreal Engine 5', 'C++ & Blueprints', 'Data-Driven Dialogue', 'Save System', 'Combat Design'],
+  },
 ]

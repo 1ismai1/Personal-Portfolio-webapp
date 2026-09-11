@@ -486,6 +486,20 @@ body {
   font-size: 21px !important; font-weight: 400; font-style: normal;
   color: var(--paper) !important; line-height: 1.5; margin-bottom: 0 !important;
 }
+.refl-video {
+  border-radius: var(--r); overflow: hidden;
+  border: 1px solid var(--bord); aspect-ratio: 16 / 9;
+  background: var(--bg);
+}
+.refl-video video { width: 100%; height: 100%; object-fit: contain; display: block; background: var(--bg); }
+.refl-video-cap { margin-top: 10px; font-size: 13px; color: var(--txt3); }
+.refl-step-video { margin-top: 24px; }
+.code-chip {
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .82em; padding: 2px 8px; border-radius: 6px;
+  background: var(--bg2); border: 1px solid var(--bord2); color: var(--lilac);
+  white-space: nowrap;
+}
 .refl-charts { margin-top: 56px; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
 .chart-card { background: var(--bg1); border: 1px solid var(--bord); border-radius: var(--r); padding: 28px 26px; }
 .chart-title { font-size: 13px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--lilac); margin-bottom: 26px; }
@@ -515,7 +529,8 @@ body {
 /* ── Responsive ── */
 @media (max-width: 1024px) {
   .refl-intro { grid-template-columns: 1fr; gap: 32px; }
-  .refl-intro .refl-device-img { max-width: 440px; }
+  .refl-intro .refl-device-img,
+  .refl-intro .refl-video { max-width: 440px; }
   .refl-charts { grid-template-columns: 1fr; }
 }
 @media (max-width: 960px) {
