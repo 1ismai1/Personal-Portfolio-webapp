@@ -9,11 +9,21 @@ export default function PagedHome({ children }: { children: ReactNode }) {
   const pages = Children.toArray(children)
   const indexRef = useRef(0)
   const animatingRef = useRef(false)
+  const viewportRef = useRef<HTMLDivElement>(null)
   const trackRef = useRef<HTMLDivElement>(null)
   const pageRefs = useRef<(HTMLDivElement | null)[]>([])
 
   useEffect(() => {
     const isPaged = () => window.matchMedia(DESKTOP_QUERY).matches
+
+    // Pages move by transform only. If the browser also scrolls the clipped
+    // viewport (e.g. arriving from a project page via /#contact makes it jump
+    // to the anchor natively), both offsets stack and the page goes off-screen,
+    // leaving a black screen. Pin the native scroll position at 0.
+    const viewport = viewportRef.current
+    const pinViewport = () => { if (viewport && viewport.scrollTop !== 0) viewport.scrollTop = 0 }
+    viewport?.addEventListener('scroll', pinViewport)
+    pinViewport()
 
     const goTo = (next: number) => {
       const clamped = Math.max(0, Math.min(PAGE_IDS.length - 1, next))
@@ -64,7 +74,9 @@ export default function PagedHome({ children }: { children: ReactNode }) {
       const a = (e.target as HTMLElement)?.closest?.('a[href]') as HTMLAnchorElement | null
       if (!a) return
       const url = new URL(a.href, window.location.href)
-      if (url.pathname !== window.location.pathname || !url.hash) return
+      if (url.pathname !== window.location.pathname) return
+      // A plain link to this page (the "IA" logo) goes back to the first screen.
+      if (!url.hash) { e.preventDefault(); goTo(0); return }
       const i = PAGE_IDS.indexOf(url.hash.slice(1))
       if (i < 0) return
       e.preventDefault()
@@ -78,6 +90,7 @@ export default function PagedHome({ children }: { children: ReactNode }) {
     onHashChange()
 
     return () => {
+      viewport?.removeEventListener('scroll', pinViewport)
       window.removeEventListener('wheel', onWheel)
       window.removeEventListener('keydown', onKeyDown)
       window.removeEventListener('hashchange', onHashChange)
@@ -86,7 +99,7 @@ export default function PagedHome({ children }: { children: ReactNode }) {
   }, [])
 
   return (
-    <div className="paged-viewport">
+    <div className="paged-viewport" ref={viewportRef}>
       <div className="paged-track" ref={trackRef}>
         {pages.map((child, i) => (
           <div

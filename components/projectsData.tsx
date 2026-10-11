@@ -18,6 +18,14 @@ export interface Project {
   sub: string
   desc: string
   stack: string[]
+  /** Shorter intro for the project page header; falls back to desc. */
+  lead?: string
+  /** Source repository, shown as a button at the top of the project page. */
+  repo?: string
+  /** Shown big on the home page: takes the top half of the Projects screen. */
+  featured?: boolean
+  image?: string
+  imageAlt?: string
 }
 
 export const projects: Project[] = [
@@ -32,12 +40,17 @@ export const projects: Project[] = [
   },
   {
     slug: 'imu-logger',
-    badge: <><GearIcon />7.8 mA Sleep Draw</>,
+    badge: <><GearIcon />Embedded Firmware</>,
     badgeClass: 'badge-silver',
     title: 'IMU Logger',
     sub: 'STM32F4 Bare-Metal Firmware · C + FreeRTOS + DMA',
-    desc: 'Register-level bare-metal firmware for an STM32F4 — no HAL — with hand-written drivers for GPIO, I2C, SPI, UART, and timers. Reads a 6-axis IMU at 100 Hz over DMA and fuses orientation with a complementary filter, while FreeRTOS tasks split acquisition, filtering, and SD-card logging across queues with a ring buffer to prevent dropped samples. Verified bus timing and interrupt latency on a logic analyzer, with sleep-mode draw measured at 7.8 mA.',
+    desc: 'Register-level bare-metal firmware for an STM32F4 — no HAL — with hand-written drivers for GPIO, I2C, SPI, UART, and timers. Reads a 6-axis IMU at 100 Hz over DMA and fuses orientation with a complementary filter, while FreeRTOS tasks split acquisition, filtering, and SD-card logging across queues with a ring buffer to prevent dropped samples. Verified bus timing and interrupt latency on a logic analyzer.',
     stack: ['C', 'STM32F4', 'FreeRTOS', 'DMA', 'SPI/I2C'],
+    lead: 'Bare-metal firmware for an STM32F411 that reads a 6-axis IMU at 100 Hz, fuses it into roll and pitch, and logs every sample to an SD card as CSV.',
+    repo: 'https://github.com/1ismai1/imu-logger-stm32',
+    featured: true,
+    image: '/imu-logger/hero-shot.jpg',
+    imageAlt: 'STM32 Nucleo board wired to an IMU breakout, a microSD module, and a logic analyzer',
   },
   {
     slug: 'exo-arm',

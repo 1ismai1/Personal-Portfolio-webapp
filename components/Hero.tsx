@@ -6,14 +6,14 @@ export default function Hero() {
       <div className="hero-inner">
         <div>
           <div className="hero-eyebrow" aria-hidden="true">
-            McMaster Engineering&nbsp;&nbsp;·&nbsp;&nbsp;Class of 2029
+            2nd Year Computer Engineering&nbsp;&nbsp;·&nbsp;&nbsp;McMaster University
           </div>
           <h1 className="hero-name">
             <span className="name-line1">Ismail</span>
             <span className="name-line2">Ahmed</span>
           </h1>
           <p className="hero-desc">
-            First-year engineering student building things that matter — from bare-metal firmware
+            Second-year computer engineering student at McMaster University, building things that matter, from bare-metal firmware
             to wearable assistive devices. 3.9&nbsp;GPA. Competed at DECA Provincials.
             Seeking a firmware, hardware, or software engineering internship.
           </p>
