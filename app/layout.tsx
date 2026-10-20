@@ -20,7 +20,7 @@ const figtree = Figtree({
 export const metadata: Metadata = {
   title: 'Ismail Ahmed — Engineering Student & Builder',
   description:
-    'Second-year computer engineering student at McMaster University. 3.9 GPA. Competed at DECA Provincials. Building bare-metal firmware, wearable devices, and more.',
+    'Second-year computer engineering student at McMaster University. 3.9/4.0 GPA. Wrote bare-metal firmware that logs motion data to an SD card at 100 Hz.',
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

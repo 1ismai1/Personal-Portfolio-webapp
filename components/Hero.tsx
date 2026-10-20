@@ -13,8 +13,8 @@ export default function Hero() {
             <span className="name-line2">Ahmed</span>
           </h1>
           <p className="hero-desc">
-            Second-year computer engineering student at McMaster University, building things that matter, from bare-metal firmware
-            to wearable assistive devices. 3.9&nbsp;GPA. Competed at DECA Provincials.
+            Second-year computer engineering student at McMaster University. Wrote bare-metal firmware that logs
+            motion data to an SD card at 100&nbsp;Hz. 3.9/4.0&nbsp;GPA.
             Seeking a firmware, hardware, or software engineering internship.
           </p>
           <div className="hero-actions">
@@ -38,7 +38,7 @@ export default function Hero() {
               <div className="photo-wash" aria-hidden="true" />
             </div>
             <div className="photo-tag" aria-hidden="true">
-              Oakville, ON&nbsp;&nbsp;·&nbsp;&nbsp;<strong>3.9 GPA</strong>
+              Oakville, ON&nbsp;&nbsp;·&nbsp;&nbsp;<strong>3.9/4.0 GPA</strong>
             </div>
           </div>
         </div>

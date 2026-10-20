@@ -28,7 +28,7 @@ export default function Contact() {
 
         <Reveal delay={100}>
           <p style={{ fontSize: '17px', color: 'var(--txt2)', lineHeight: 1.8, marginTop: '18px', maxWidth: '520px' }}>
-            I&apos;m actively seeking software engineering internships. If you&apos;re building something interesting, I&apos;d love to hear from you.
+            I&apos;m actively seeking firmware, hardware, or software engineering internships. If you&apos;re building something interesting, I&apos;d love to hear from you.
           </p>
           <div className="clinks">
             <a href="mailto:Ismail.ahm22d@gmail.com" className="clink">
