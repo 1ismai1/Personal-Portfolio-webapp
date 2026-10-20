@@ -18,7 +18,7 @@ export default function Hero() {
             Seeking a firmware, hardware, or software engineering internship.
           </p>
           <div className="hero-actions">
-            <a href="#projects" className="btn-primary">View Projects</a>
+            <a href="#embedded" className="btn-primary">View Projects</a>
             <a href="#contact" className="btn-ghost">Get in touch&nbsp;→</a>
           </div>
         </div>

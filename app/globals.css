@@ -294,12 +294,12 @@ body {
 
 /* ── Projects — soft plates ── */
 .projects { padding: 112px 0; position: relative; z-index: 1; }
-/* Home Projects screen: IMU Logger fills the top half, the other three share the bottom half. */
+/* Home Projects screen: the non-embedded projects share one row of cards. */
 .projects-inner { display: flex; flex-direction: column; gap: 20px; }
 .projects-inner > .sec-head { margin-bottom: 4px; }
-.projects-feature, .projects-others > .reveal { display: flex; flex-direction: column; }
-.projects-feature > .pcard-link, .projects-others > .reveal > .pcard-link { display: flex; flex: 1; }
-.projects-feature .pcard, .projects-others .pcard { flex: 1; }
+.projects-others > .reveal { display: flex; flex-direction: column; }
+.projects-others > .reveal > .pcard-link { display: flex; flex: 1; }
+.projects-others .pcard { flex: 1; }
 .projects-others { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
 .projects-others .pcard { padding: 22px 24px; }
 .projects-others .pbadge { margin-bottom: 12px; }
@@ -307,21 +307,10 @@ body {
 .projects-others .psub { margin-bottom: 10px; }
 .projects-others .pdesc {
   flex: 0 0 auto; font-size: 15px; line-height: 1.6; margin-bottom: 14px;
-  display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden;
+  display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 8; overflow: hidden;
 }
 .projects-others .ttag:nth-child(n+4) { display: none; }
 
-.pcard.pcard-feature {
-  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
-  padding: 0; background: var(--aub-field); border-color: rgba(201, 176, 218, .22);
-}
-.pcard.pcard-feature:hover { background: var(--aub-field); border-color: rgba(201, 176, 218, .4); }
-.pfeat-body { padding: clamp(22px, 2.2vw, 34px); display: flex; flex-direction: column; justify-content: center; }
-.pfeat-badges { display: flex; flex-wrap: wrap; gap: 8px; }
-.pcard-feature .ptitle { font-size: clamp(32px, 3.3vw, 48px); letter-spacing: -.03em; line-height: 1.05; margin-bottom: 10px; }
-.pcard-feature .pdesc { flex: 0 0 auto; font-size: 16px; margin-bottom: 16px; }
-.pcard-feature .pstack { margin-top: 0; }
-.pcard-feature .psub { margin-bottom: 12px; }
 .pcta {
   margin-top: 20px; font-size: 15px; font-weight: 500; color: var(--lilac);
   display: inline-flex; align-items: center; gap: 8px;
@@ -329,45 +318,91 @@ body {
 .pcta span { display: inline-block; transition: transform .25s cubic-bezier(.2, .8, .2, 1); }
 .pcard-link:hover .pcta span { transform: translateX(5px); }
 .pcard-link:focus-visible { outline: 2px solid var(--lilac); outline-offset: 4px; border-radius: var(--r); }
-.pfeat-media { position: relative; min-height: 220px; overflow: hidden; background: var(--blue-field); }
-.pfeat-media img { object-fit: cover; object-position: 55% 50%; filter: contrast(1.04); }
-.pfeat-shade {
-  position: absolute; inset: 0; pointer-events: none;
-  background: linear-gradient(90deg, var(--aub-field) 0%, transparent 28%),
-              linear-gradient(160deg, rgba(22, 48, 74, .3) 0%, transparent 55%);
-}
 
 @media (min-width: 900px) {
   .projects { min-height: 100vh; padding: 92px 0 28px; display: flex; flex-direction: column; }
-  .projects-inner { flex: 1; width: 100%; }
+  .projects-inner { flex: 1; width: 100%; justify-content: center; }
   .projects .sec-head { max-width: none; display: flex; align-items: baseline; gap: 20px; margin-bottom: 0; }
   .projects .sec-label { margin-bottom: 0; }
   .projects .sec-title { font-size: clamp(30px, 3.4vw, 42px); }
-  .projects-feature { flex: 1.1 1 0; }
-  .projects-others { flex: 1 1 0; }
-  .pfeat-media { min-height: 0; }
 }
 
-/* Short laptop screens (e.g. 1366x768, 1280x720): keep both halves on one screen. */
+/* Short laptop screens (e.g. 1366x768, 1280x720): keep everything on one screen. */
 @media (min-width: 900px) and (max-height: 820px) {
   .projects { padding: 84px 0 20px; }
   .projects-inner { gap: 16px; }
-  .pfeat-body { padding: 20px 28px; }
-  .pfeat-badges .pbadge, .projects-others .pbadge { margin-bottom: 10px; padding: 5px 12px; }
-  .pcard-feature .ptitle { font-size: 36px; margin-bottom: 6px; }
-  .pcard-feature .psub { margin-bottom: 8px; }
-  .pcard-feature .pdesc { font-size: 15px; line-height: 1.55; margin-bottom: 12px; }
-  .pcta { margin-top: 12px; }
+  .projects-others .pbadge { margin-bottom: 10px; padding: 5px 12px; }
   .projects-others .pcard { padding: 18px 22px; }
   .projects-others .ptitle { font-size: 20px; }
   .projects-others .psub { margin-bottom: 8px; }
-  .projects-others .pdesc { -webkit-line-clamp: 2; margin-bottom: 0; }
-  .projects-feature { flex: 1.25 1 0; }
+}
+
+/* ── Embedded screen: the IMU logger firmware and the shield PCB it runs on ── */
+.embedded { padding: 112px 0; position: relative; z-index: 1; }
+.embedded-inner { display: flex; flex-direction: column; gap: 20px; }
+.embedded-inner > .sec-head { margin-bottom: 4px; }
+.embedded-note { font-size: 16px; color: var(--txt3); }
+.embedded-pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+.embedded-pair > .reveal { display: flex; flex-direction: column; }
+.embedded-pair > .reveal > .pcard-link { display: flex; flex: 1; }
+
+.pcard.ecard { padding: 0; flex: 1; min-width: 0; background: var(--bg1); }
+.ecard-media {
+  position: relative; overflow: hidden; background: var(--blue-field);
+  aspect-ratio: 16 / 9;
+  display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 2px;
+}
+.ecard-tile { position: relative; min-height: 0; }
+.ecard-tile img { object-fit: cover; filter: contrast(1.04); }
+/* Colour treatment: pulls the green board and the bench photo toward the site's blue. */
+.ecard-shade {
+  position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(to top, rgba(10, 10, 12, .5) 0%, transparent 40%),
+              linear-gradient(160deg, rgba(22, 48, 74, .45) 0%, rgba(58, 36, 80, .18) 100%);
+  mix-blend-mode: multiply;
+}
+.ecard-body { padding: 22px 26px 24px; display: flex; flex-direction: column; flex: 0 0 auto; }
+.ecard-badges { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; margin-bottom: 14px; }
+.ecard-badges .pbadge { margin-bottom: 0; }
+.ecard-status { font-size: 13px; color: var(--txt3); }
+.ecard .ptitle { font-size: clamp(26px, 2.6vw, 36px); letter-spacing: -.03em; line-height: 1.05; margin-bottom: 8px; }
+.ecard .psub { margin-bottom: 12px; }
+.ecard .pdesc { flex: 0 0 auto; font-size: 15px; line-height: 1.6; margin-bottom: 14px; }
+.ecard .pstack { margin-top: 0; margin-bottom: 14px; }
+.ecard .pcta { margin-top: auto; }
+.pcard.ecard:hover .ecard-tile img { transform: scale(1.03); }
+.ecard-tile img { transition: transform .6s cubic-bezier(.2, .8, .2, 1); }
+
+@media (min-width: 900px) {
+  .embedded { min-height: 100vh; padding: 92px 0 28px; display: flex; flex-direction: column; }
+  .embedded-inner { flex: 1; width: 100%; }
+  .embedded .sec-head { max-width: none; display: flex; align-items: baseline; gap: 20px; margin-bottom: 0; }
+  .embedded .sec-label { margin-bottom: 0; }
+  .embedded .sec-title { font-size: clamp(30px, 3.4vw, 42px); }
+  .embedded-note { margin-left: auto; }
+  /* Both cards share two grid rows (image, text), so the image areas match and so do
+     the text boxes: the text row is as tall as the longer card needs, the image row takes the rest. */
+  .embedded-pair { flex: 1 1 0; grid-template-rows: minmax(0, 1fr) auto; row-gap: 0; }
+  .embedded-pair > .reveal,
+  .embedded-pair > .reveal > .pcard-link,
+  .pcard.ecard {
+    display: grid; grid-row: span 2; grid-template-rows: subgrid;
+  }
+  .ecard-media { min-height: 0; aspect-ratio: auto; }
+}
+@media (min-width: 900px) and (max-height: 820px) {
+  .embedded { padding: 84px 0 20px; }
+  .embedded-inner { gap: 16px; }
+  .ecard-body { padding: 16px 22px 18px; }
+  .ecard-badges { margin-bottom: 10px; }
+  .ecard .ptitle { font-size: 26px; margin-bottom: 6px; }
+  .ecard .psub { margin-bottom: 8px; }
+  .ecard .pdesc { font-size: 14px; line-height: 1.5; margin-bottom: 10px; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden; }
+  .pcta { margin-top: 12px; }
 }
 @media (min-width: 900px) and (max-height: 745px) {
-  .projects-others .pstack { display: none; }
-  .pcard-feature .pstack { display: none; }
-  .pcard-feature .pdesc { margin-bottom: 0; }
+  .ecard .pstack { display: none; }
+  .ecard .pdesc { margin-bottom: 0; -webkit-line-clamp: 2; }
 }
 .pcard-link { display: block; text-decoration: none; color: inherit; }
 .pcard {
@@ -693,6 +728,55 @@ body {
 .imu-gallery { display: grid; grid-template-columns: 1fr; gap: 36px; margin-top: 22px; }
 .imu-gallery .imu-fig { margin-bottom: 0; }
 
+/* ── IMU Logger Shield case study ── */
+.proj-foot { display: flex; flex-wrap: wrap; gap: 12px; }
+.shield-hero {
+  position: relative; margin: 0 0 20px; overflow: hidden;
+  border-radius: var(--r); border: 1px solid var(--bord); background: var(--blue-field);
+}
+.shield-hero-tiles { position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+.shield-tile { position: relative; aspect-ratio: 1400 / 1077; }
+.shield-tile img { object-fit: cover; filter: contrast(1.04); }
+.shield-hero .img-overlay {
+  position: absolute; inset: 0; pointer-events: none; mix-blend-mode: multiply;
+  background: linear-gradient(to top, rgba(10, 10, 12, .5) 0%, transparent 30%),
+              linear-gradient(160deg, rgba(22, 48, 74, .4) 0%, rgba(58, 36, 80, .15) 100%);
+}
+/* Caption sits under the tiles: one label per side, then the sentence. */
+.shield-hero-cap {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 6px 2px;
+  padding: 14px 24px 16px; background: var(--bg1); border-top: 1px solid var(--bord);
+  font-size: 12px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--lilac);
+}
+.shield-hero-cap p {
+  grid-column: 1 / -1; margin-top: 4px;
+  font-size: 14px; font-weight: 400; letter-spacing: 0; text-transform: none; color: var(--txt3);
+}
+.shield-inline-link { color: var(--lilac); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(201, 176, 218, .4); }
+.shield-inline-link:hover { text-decoration-color: var(--lilac); }
+.shield-inline-link:focus-visible { outline: 2px solid var(--lilac); outline-offset: 3px; border-radius: 4px; }
+
+.shield-blocks { list-style: none; margin: 4px 0 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.shield-block { background: var(--bg2); border: 1px solid var(--bord); border-radius: var(--r-sm); padding: 20px 22px; }
+.shield-block-name {
+  font-family: var(--font-newsreader), Georgia, serif;
+  font-size: 22px; font-weight: 500; letter-spacing: -.015em; color: var(--paper); line-height: 1.15;
+}
+.shield-block-parts { margin: 4px 0 12px; font-size: 12px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--lilac); }
+.shield-block p { font-size: 15px !important; line-height: 1.6 !important; margin-bottom: 0 !important; color: var(--txt2); }
+.imu-bug code, .shield-block code { font-size: .9em; color: var(--lilac); }
+
+.pin-wrap { margin-top: 22px; overflow-x: auto; border: 1px solid var(--bord); border-radius: var(--r-sm); background: var(--bg1); }
+.pin-table { width: 100%; min-width: 560px; border-collapse: collapse; font-size: 14px; }
+.pin-table th, .pin-table td { padding: 12px 18px; text-align: left; border-top: 1px solid var(--bord); color: var(--txt2); white-space: nowrap; }
+.pin-table thead th {
+  border-top: none; background: var(--bg2);
+  font-size: 12px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--lilac);
+}
+.pin-table tbody th { font-weight: 500; color: var(--paper); font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace; font-size: 13px; }
+.pin-table tbody tr:hover { background: var(--bg2); }
+.pin-note { margin-top: 14px; font-size: 14px; color: var(--txt3); }
+
 .refl-charts { margin-top: 56px; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
 .chart-card { background: var(--bg1); border: 1px solid var(--bord); border-radius: var(--r); padding: 28px 26px; }
 .chart-title { font-size: 13px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--lilac); margin-bottom: 26px; }
@@ -730,9 +814,8 @@ body {
   .hero-inner    { grid-template-columns: 1fr; gap: 44px; }
   .photo-side    { display: flex; justify-content: center; }
   .projects-others { grid-template-columns: 1fr; }
-  .pcard.pcard-feature { grid-template-columns: 1fr; }
-  .pfeat-media { order: -1; aspect-ratio: 16 / 10; }
-  .pfeat-shade { background: linear-gradient(0deg, var(--aub-field) 0%, transparent 30%); }
+  .embedded-pair { grid-template-columns: 1fr; }
+  .embedded-note { margin-top: 4px; }
   .projects-others .pdesc { display: block; -webkit-line-clamp: unset; }
   .projects-others .ttag:nth-child(n+4) { display: inline-flex; }
   .skills-cols { grid-template-columns: 1fr 1fr; }
@@ -753,5 +836,8 @@ body {
   .imu-hero { aspect-ratio: 3 / 2; }
   .imu-hero img { object-position: 60% 50%; }
   .imu-hero .refl-device-cap { font-size: 12px; padding: 12px 16px; }
+  .shield-hero-tiles { grid-template-columns: 1fr; }
+  .shield-hero-cap span { display: none; }
+  .shield-blocks { grid-template-columns: 1fr; }
   .refl-step { padding: 26px 20px; }
 }

@@ -22,10 +22,12 @@ export interface Project {
   lead?: string
   /** Source repository, shown as a button at the top of the project page. */
   repo?: string
-  /** Shown big on the home page: takes the top half of the Projects screen. */
-  featured?: boolean
-  image?: string
-  imageAlt?: string
+  /** Shown on the home page's Embedded screen instead of the Projects screen. */
+  group?: 'embedded'
+  /** Card images for the Embedded screen. One fills the media area; two sit side by side. */
+  images?: { src: string; alt: string; position?: string }[]
+  /** Small status line under the title on the Embedded cards. */
+  status?: string
 }
 
 export const projects: Project[] = [
@@ -48,9 +50,31 @@ export const projects: Project[] = [
     stack: ['C', 'STM32F4', 'FreeRTOS', 'DMA', 'SPI/I2C'],
     lead: 'Bare-metal firmware for an STM32F411 that reads a 6-axis IMU at 100 Hz, fuses it into roll and pitch, and logs every sample to an SD card as CSV.',
     repo: 'https://github.com/1ismai1/imu-logger-stm32',
-    featured: true,
-    image: '/imu-logger/hero-shot.jpg',
-    imageAlt: 'STM32 Nucleo board wired to an IMU breakout, a microSD module, and a logic analyzer',
+    group: 'embedded',
+    status: 'Built and measured on a bench setup',
+    images: [
+      {
+        src: '/imu-logger/hero-shot.jpg',
+        alt: 'STM32 Nucleo board wired to an IMU breakout, a microSD module, and a logic analyzer',
+        position: '55% 50%',
+      },
+    ],
+  },
+  {
+    slug: 'imu-shield',
+    badge: <><GearIcon />PCB Design</>,
+    badgeClass: 'badge-eng',
+    title: 'IMU Logger Shield',
+    sub: 'Altium Designer · 2-layer PCB · NUCLEO-F411RE',
+    desc: 'A 2-layer shield that plugs onto a NUCLEO-F411RE and turns the IMU logger bench setup into one board: an IMU header, a bare microSD socket on SPI, and a socket for a XIAO ESP32-C3 wireless link. The SD card gets its own switchable 3.3 V rail so firmware can hard power-cycle a hung card, and a divider lets the MCU read battery voltage. Designed in Altium, with the SMD parts assembled by JLCPCB.',
+    lead: 'A 2-layer Arduino-style shield for the NUCLEO-F411RE that adds a microSD socket with switchable power, an IMU header, a wireless link, and a battery input to the IMU logger.',
+    stack: ['Altium Designer', '2-Layer PCB', 'STM32 Nucleo', 'JLCPCB SMT', 'Power Design'],
+    group: 'embedded',
+    status: 'v1 ordered Oct 14, in fabrication',
+    images: [
+      { src: '/imu-shield/board-top.png', alt: 'Top of the IMU Logger Shield PCB, rendered from the Gerbers', position: '50% 50%' },
+      { src: '/imu-shield/board-bottom.png', alt: 'Bottom of the IMU Logger Shield PCB, rendered from the Gerbers', position: '50% 50%' },
+    ],
   },
   {
     slug: 'exo-arm',

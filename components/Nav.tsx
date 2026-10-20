@@ -42,6 +42,7 @@ export default function Nav() {
     <nav ref={navRef} className="nav" role="navigation" aria-label="Main navigation">
       <Link href="/" className="nav-logo" aria-label="Ismail Ahmed — Home">IA</Link>
       <div className="nav-links">
+        <a href="/#embedded">Embedded</a>
         <a href="/#projects">Projects</a>
         <a href="/#skills">Skills</a>
         <a href="/#contact" className="nav-cta">Contact</a>

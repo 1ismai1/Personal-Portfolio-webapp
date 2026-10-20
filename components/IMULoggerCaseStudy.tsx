@@ -1,26 +1,6 @@
 import Image from 'next/image'
 import Reveal from './Reveal'
-
-interface FigureProps {
-  src: string
-  alt: string
-  width: number
-  height: number
-  caption: string
-  className?: string
-}
-
-/** A logic-analyzer or plot capture. Unoptimized + uncropped so decoded bytes stay crisp; click opens full size. */
-function Figure({ src, alt, width, height, caption, className = '' }: FigureProps) {
-  return (
-    <figure className={`imu-fig ${className}`}>
-      <a href={src} target="_blank" rel="noopener noreferrer" className="imu-fig-plate" aria-label={`${alt} (opens full size)`}>
-        <Image src={src} alt={alt} width={width} height={height} unoptimized sizes="(max-width: 960px) 100vw, 1100px" />
-      </a>
-      <figcaption>{caption} <span className="imu-fig-hint">Tap to enlarge.</span></figcaption>
-    </figure>
-  )
-}
+import Figure from './Figure'
 
 const stats = [
   { num: '100', unit: 'Hz', label: 'Sample rate' },

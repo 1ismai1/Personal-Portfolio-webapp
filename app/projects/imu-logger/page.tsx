@@ -20,6 +20,7 @@ export default function IMULoggerPage() {
       <IMULoggerCaseStudy />
       <div className="container proj-foot">
         <Link href="/" className="btn-ghost">← Back home</Link>
+        <Link href="/projects/imu-shield" className="btn-ghost proj-foot-link">See the board: IMU Logger Shield →</Link>
       </div>
     </main>
   )

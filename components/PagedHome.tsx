@@ -1,7 +1,7 @@
 'use client'
 import { Children, useEffect, useRef, type ReactNode } from 'react'
 
-const PAGE_IDS = ['about', 'projects', 'skills', 'contact']
+const PAGE_IDS = ['about', 'embedded', 'projects', 'skills', 'contact']
 const TRANSITION_MS = 700
 const DESKTOP_QUERY = '(min-width: 900px)'
 
@@ -65,7 +65,7 @@ export default function PagedHome({ children }: { children: ReactNode }) {
       if (i >= 0) goTo(i)
     }
 
-    // Same-page hash links (e.g. Hero's "View Projects" -> #projects, Nav's
+    // Same-page hash links (e.g. Hero's "View Projects" -> #embedded, Nav's
     // -> /#skills) must not also trigger the browser's native jump-to-anchor —
     // that scrolls .paged-viewport itself on top of our transform, stacking
     // an extra page-height of movement. Handle the navigation ourselves instead.
