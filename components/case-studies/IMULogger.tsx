@@ -10,6 +10,7 @@ import Replay from '@/components/replay/Replay'
  * Facts: resume + firmware repo (task names and priorities are from
  * Core/Src/main.c) + captures in public/imu-logger/.
  */
+// Job descriptions confirmed by Ismail; checked against Core/Src/main.c on GitHub.
 const tasks = [
   { name: 'imu', prio: 'High', job: 'Reads the sensor on every 10 ms tick. Nothing below it can delay a sample.' },
   { name: 'filter', prio: 'Above normal', job: 'Calibrates gyro bias, runs the complementary filter, queues the row.' },
@@ -113,6 +114,12 @@ export default function IMULogger() {
           alt="Logic analyzer view of SCL, SDA, SPI, and a debug pin across several 10 millisecond frames"
           caption="Every bus plus a debug pin across 10 ms frames, captured before the DMA work."
         />
+      </Section>
+      <Section refId="TP7" label="Clock" title="From 1.5% clock error to under 0.06%">
+        <p>
+          I traced a 1.5% clock error to the internal RC oscillator. After correcting it, the clock error was under 0.06%.
+        </p>
+        {/* TODO(ismail): export the PulseView clock capture to public/imu-logger/clock-hse.png before adding CaptureViewer. */}
       </Section>
     </div>
   )

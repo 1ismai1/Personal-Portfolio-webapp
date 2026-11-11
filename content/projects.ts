@@ -138,7 +138,7 @@ export const projects: Project[] = [
       'A 3D-printed forearm-mounted assistive device for a client with Juvenile Rheumatoid Arthritis. A connector system holds everyday objects without grip strength, built within a $100 budget and a 20-hour print limit.',
     status: { label: 'Course project', tone: 'neutral' },
     stack: ['CAD', '3D printing', 'Iterative design', 'User testing'],
-    image: { src: '/Exo-arm-main.png', alt: 'The Exo Arm: a blue 3D-printed forearm frame with Velcro straps', width: 249, height: 155 },
+    image: { src: '/Exo-arm-main.png', alt: 'The Exo Arm: a blue 3D-printed forearm frame with Velcro straps', width: 314, height: 164 },
   },
   {
     slug: 'disillusionary-tale',
