@@ -112,6 +112,7 @@ export const projects: Project[] = [
     status: { label: 'In progress', tone: 'live' },
     stack: ['Python', 'C', 'STM32', 'UART', 'CRC-32', 'Bootloader'],
     team: 'Team of 2',
+    repo: 'https://github.com/ronitbhanot4/stm32-ota-bootloader',
     stats: [
       { value: '23', label: 'tests covering lost ACKs and corrupted data' },
     ],
