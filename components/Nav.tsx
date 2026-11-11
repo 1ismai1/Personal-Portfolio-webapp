@@ -1,52 +1,29 @@
-'use client'
-import { useEffect, useRef } from 'react'
 import Link from 'next/link'
 
+const links = [
+  { href: '/#replay', label: 'Replay' },
+  { href: '/#work', label: 'Work' },
+  { href: '/#skills', label: 'Skills' },
+]
+
+/** Fixed top bar. Server component: no scroll listeners, no client JS. */
 export default function Nav() {
-  const navRef = useRef<HTMLElement>(null)
-
-  useEffect(() => {
-    // Scroll events don't bubble, but a capturing listener on window still
-    // sees them fire on nested scroll containers (each .page on desktop) —
-    // this covers both that case and plain document scroll (mobile, project pages).
-    const onScroll = (e: Event) => {
-      const target = e.target as Document | HTMLElement
-      const scrollTop = target instanceof Document ? window.scrollY : target.scrollTop
-      navRef.current?.classList.toggle('scrolled', scrollTop > 24)
-    }
-    window.addEventListener('scroll', onScroll, { passive: true, capture: true })
-    return () => window.removeEventListener('scroll', onScroll, true)
-  }, [])
-
-  useEffect(() => {
-    const sections = Array.from(document.querySelectorAll<HTMLElement>('.page[id]'))
-    const links = navRef.current?.querySelectorAll<HTMLAnchorElement>('.nav-links a[href^="/#"]')
-    if (!sections.length || !links || !links.length) return
-
-    const obs = new IntersectionObserver(
-      entries => {
-        entries.forEach(entry => {
-          if (!entry.isIntersecting) return
-          links.forEach(a =>
-            a.classList.toggle('active', a.getAttribute('href') === `/#${entry.target.id}`)
-          )
-        })
-      },
-      { threshold: 0.5 }
-    )
-    sections.forEach(s => obs.observe(s))
-    return () => obs.disconnect()
-  }, [])
-
   return (
-    <nav ref={navRef} className="nav" role="navigation" aria-label="Main navigation">
-      <Link href="/" className="nav-logo" aria-label="Ismail Ahmed — Home">IA</Link>
-      <div className="nav-links">
-        <a href="/#embedded">Embedded</a>
-        <a href="/#projects">Projects</a>
-        <a href="/#skills">Skills</a>
-        <a href="/#contact" className="nav-cta">Contact</a>
-      </div>
-    </nav>
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-line bg-mask-900/90 backdrop-blur-md">
+      <nav className="wrap flex h-16 items-center justify-between gap-4" aria-label="Main">
+        <Link href="/" className="flex min-h-[44px] items-center gap-2.5 font-mono text-sm font-medium text-silk no-underline transition-colors duration-fast hover:text-phos active:text-phos" aria-label="Ismail Ahmed, home">
+          <span className="tp" aria-hidden="true" />
+          <span>Ismail Ahmed</span>
+        </Link>
+        <div className="flex items-center gap-1 sm:gap-2">
+          {links.map(l => (
+            <Link key={l.href} href={l.href} className="hidden min-h-[44px] items-center rounded-sm px-3 text-sm text-silk-2 no-underline transition-colors duration-fast hover:text-silk active:text-phos sm:inline-flex">
+              {l.label}
+            </Link>
+          ))}
+          <Link href="/#contact" className="btn btn-line min-h-[40px] px-4">Contact</Link>
+        </div>
+      </nav>
+    </header>
   )
 }
