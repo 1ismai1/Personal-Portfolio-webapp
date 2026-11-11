@@ -14,7 +14,14 @@ export const generateStaticParams = () => projects.map(p => ({ slug: p.slug }))
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const p = getProject((await params).slug)
-  return p ? { title: p.title, description: p.lead ?? p.summary } : {}
+  if (!p) return {}
+  const description = p.lead ?? p.summary
+  const images = p.image ? [{ url: p.image.src, width: p.image.width, height: p.image.height, alt: p.image.alt }] : ['/opengraph-image']
+  return {
+    title: p.title, description,
+    openGraph: { title: p.title, description, url: `/projects/${p.slug}`, siteName: 'Ismail Ahmed', type: 'website', images },
+    twitter: { card: 'summary_large_image', title: p.title, description, images },
+  }
 }
 
 export default async function ProjectPage({ params }: { params: Promise<{ slug: string }> }) {
