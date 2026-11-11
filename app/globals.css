@@ -1,7 +1,3 @@
-/* Legacy styles: only the four un-ported case studies still use these classes.
-   Delete this import (and app/legacy.css) once HANDOFF.md task 2 is done. */
-@import './legacy.css';
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -22,19 +18,6 @@
   --ease-spring: cubic-bezier(.2,.9,.25,1.15);
   --ease-out: cubic-bezier(.16,1,.3,1);
 
-  /* Legacy aliases: map the old "Soft Field" variables onto the new palette
-     so un-ported case studies match the rest of the site. */
-  --bg: var(--mask-900); --bg1: var(--mask-800); --bg2: var(--mask-700); --bg3: var(--mask-600);
-  --blue: var(--mask-600); --blue-hi: var(--trace-dim); --blue-field: var(--mask-800); --blue-txt: var(--trace);
-  --aub: var(--mask-600); --aub-hi: var(--phos); --aub-field: var(--mask-800); --lilac: var(--phos);
-  --ring: rgba(245,181,70,.28);
-  --ox: #7A2E24; --ox-txt: #FFD9D2;
-  --paper: var(--silk); --txt: var(--silk); --txt2: var(--silk-2); --txt3: var(--silk-3);
-  --acclo: rgba(245,181,70,.10);
-  --bord: var(--line); --bord2: var(--line-2);
-  --r-xs: 2px; --r-sm: 6px; --r: 10px; --r-pill: 6px;
-  --font-newsreader: var(--font-display);
-  --font-figtree: var(--font-body);
 }
 
 html { scroll-behavior: smooth; scroll-padding-top: 88px; background: var(--mask-900); }
