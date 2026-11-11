@@ -1,5 +1,9 @@
 # HANDOFF: finishing the redesign
 
+## Motion update, November 11, 2026
+
+Added the four requested entrances: a signal sweep when Embedded work enters view, plus waveform, board-layer, and packet sequences for IMU Logger, Sensor Shield, and OTA. Graphics finish and fade away; reduced motion disables all four. No new dependencies. Converted the hero's internal anchors to Next Link after reproducing a null-history-state Back-button failure. Production browser checks pass at 390/1440, including Back, direct navigation, reduced motion, no-JavaScript content, overflow and runtime errors. TypeScript/build pass; home initial JavaScript is now 119 kB. Details and repeatable browser check: docs/superpowers/plans/2026-11-11-project-motion.md and scripts/check-motion.mjs.
+
 ## Completion update, November 11, 2026
 
 Implemented the content pass and clock section; Ismail confirmed all four task descriptions. Ported all four case studies and removed old components/CSS. Expanded OTA using the repository Ismail supplied: `ronitbhanot4/stm32-ota-bootloader` (format, sender and 23 tests checked at `18ee3f0`). Receiver protocol remains a draft; hardware verification is stated only for the bootloader jump.

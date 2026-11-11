@@ -1,4 +1,5 @@
 import Hero from '@/components/home/Hero'
+import WorkArrival from '@/components/home/WorkArrival'
 import ProjectCard from '@/components/home/ProjectCard'
 import ProofStrip from '@/components/home/ProofStrip'
 import Skills from '@/components/home/Skills'
@@ -49,7 +50,9 @@ export default function Page() {
       </section>
 
       <section id="work" className="wrap py-section" aria-label="Embedded work">
-        <Heading refId="TP2" label="Embedded work" title="Firmware, the board under it, and the proof" />
+        <WorkArrival>
+          <Heading refId="TP2" label="Embedded work" title="Firmware, the board under it, and the proof" />
+        </WorkArrival>
         <ProjectCard project={lead} feature />
 
         <Evidence id="timing" title="Where the 1.5 ms went" note="One 10 ms sample period, before and after moving bus transfers to DMA. The bus takes just as long. The CPU stops waiting for it.">

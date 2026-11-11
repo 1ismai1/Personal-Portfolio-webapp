@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation'
 import { StatRow, StatusBadge } from '@/components/kit'
 import { getProject, projects } from '@/content/projects'
 import { bodies } from './bodies'
+import ProjectArrival from '@/components/ProjectArrival'
 
 /**
  * One route for every project. The header comes from content/projects.ts;
@@ -32,8 +33,10 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
   const next = projects[(i + 1) % projects.length]
 
   return (
-    <article>
-      <header className="wrap pb-10 pt-28 md:pt-36">
+    <article key={p.slug} data-project-motion={p.slug}>
+      <header className="project-header relative isolate overflow-hidden">
+        <ProjectArrival slug={p.slug} />
+        <div className="wrap relative pb-10 pt-28 md:pt-36">
         <Link href="/#work" className="link text-sm">All projects</Link>
         <div className="mt-8 flex flex-wrap items-center gap-3">
           <span className="ref">{p.kind}</span>
@@ -50,6 +53,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
           <a href={p.repo} target="_blank" rel="noopener noreferrer" className="btn btn-line mt-7">Source on GitHub</a>
         )}
         {p.stats && p.stats.length > 1 && <StatRow stats={p.stats} className="mt-10" />}
+        </div>
       </header>
 
       {Body ? <Body /> : (

@@ -122,3 +122,87 @@ body::before {
   .btn, .ctl { transition: none; }
 }
 .scrub { accent-color: var(--phos); }
+
+/* Four intentional arrivals: one work-section cue and three project openings.
+   Everything is visible by default, including with JS or motion disabled. */
+.work-arrival { position: relative; }
+.work-signal { position: absolute; top: -24px; left: 0; right: 0; height: 2px; overflow: hidden; pointer-events: none; }
+.work-signal span { position: absolute; inset: 0; background: var(--trace); opacity: 0; transform-origin: left; }
+.work-signal span + span { width: 18%; background: var(--phos); }
+.project-arrival { display: none; position: absolute; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
+.project-arrival svg { position: absolute; top: 92px; right: -6%; width: min(70%, 900px); height: auto; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .work-arrival[data-arrived] .work-signal span:first-child { animation: work-connect 900ms var(--ease-out) both; }
+  .work-arrival[data-arrived] .work-signal span + span { animation: work-pulse 1000ms var(--ease-out) both; }
+  .work-arrival[data-arrived] h2 { animation: work-heading 700ms var(--ease-out) both; }
+  .work-arrival[data-arrived] + article { animation: work-board 800ms 100ms var(--ease-out) backwards; }
+
+  .project-arrival { display: block; animation: arrival-finish 1400ms ease-out both; }
+  .arrival-wave-cover { animation: arrival-uncover 850ms 60ms cubic-bezier(.4,0,.2,1) both; }
+  .arrival-scan { animation: arrival-scan 850ms 60ms cubic-bezier(.4,0,.2,1) both; }
+  .arrival-board { transform-origin: 360px 160px; animation: board-align 1000ms var(--ease-out) both; }
+  .arrival-board-0 { --board-x: -90px; --board-y: 85px; --board-turn: -16deg; }
+  .arrival-board-1 { --board-x: 0px; --board-y: 0px; --board-turn: -8deg; animation-delay: 70ms; }
+  .arrival-board-2 { --board-x: 90px; --board-y: -85px; --board-turn: 8deg; animation-delay: 140ms; }
+  .arrival-packet { animation: packet-send 900ms cubic-bezier(.16,1,.3,1) both; animation-delay: calc(var(--packet) * 65ms); }
+  .arrival-bank { animation: bank-receive 1100ms ease-out both; }
+
+  [data-project-motion='imu-logger'] .project-header h1 { animation: logger-open 760ms var(--ease-out) both; }
+  [data-project-motion='imu-shield'] .project-header h1 { animation: shield-open 850ms var(--ease-out) both; transform-origin: left center; }
+  [data-project-motion='ota-update'] .project-header h1 { animation: ota-open 760ms var(--ease-out) both; }
+}
+
+@keyframes work-connect {
+  0% { transform: scaleX(0); opacity: .9; }
+  65% { transform: scaleX(1); opacity: .65; }
+  100% { transform: scaleX(1); opacity: 0; }
+}
+@keyframes work-pulse {
+  0% { transform: translateX(-110%); opacity: 0; }
+  15% { opacity: 1; }
+  85% { opacity: 1; }
+  100% { transform: translateX(560%); opacity: 0; }
+}
+@keyframes work-heading {
+  from { transform: translateX(-20px); opacity: .55; }
+  to { transform: none; opacity: 1; }
+}
+@keyframes work-board {
+  from { transform: translateY(22px); opacity: .7; }
+  to { transform: none; opacity: 1; }
+}
+@keyframes arrival-finish {
+  0% { opacity: 0; }
+  16%, 65% { opacity: .45; }
+  100% { opacity: 0; }
+}
+@keyframes arrival-uncover { from { transform: translateX(0); } to { transform: translateX(101%); } }
+@keyframes arrival-scan {
+  0% { transform: translateX(0); opacity: 0; }
+  12%, 88% { opacity: 1; }
+  100% { transform: translateX(720px); opacity: 0; }
+}
+@keyframes board-align {
+  from { transform: translate(var(--board-x), var(--board-y)) rotate(var(--board-turn)); opacity: .1; }
+  45% { opacity: 1; }
+  to { transform: translate(0, 0) rotate(0); opacity: 1; }
+}
+@keyframes packet-send {
+  0% { transform: translateX(-360px); opacity: 0; }
+  30%, 60% { transform: translateX(0); opacity: 1; }
+  100% { transform: translateX(620px); opacity: 0; }
+}
+@keyframes bank-receive { 0%, 30% { opacity: .2; } 65%, 100% { opacity: 1; } }
+@keyframes logger-open { from { transform: translateX(12px); opacity: .55; } to { transform: none; opacity: 1; } }
+@keyframes shield-open { from { transform: translateY(22px) rotate(-1deg) scale(.97); opacity: .55; } to { transform: none; opacity: 1; } }
+@keyframes ota-open { from { transform: translateX(-12px); opacity: .55; } to { transform: none; opacity: 1; } }
+
+@media (max-width: 767px) {
+  .project-arrival svg { top: 100px; right: -15%; width: 110%; }
+  @keyframes arrival-finish {
+    0% { opacity: 0; }
+    16%, 65% { opacity: .25; }
+    100% { opacity: 0; }
+  }
+}
