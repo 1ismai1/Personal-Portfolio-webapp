@@ -1,37 +1,30 @@
 import type { Metadata } from 'next'
-import { Newsreader, Figtree } from 'next/font/google'
+import { Archivo, IBM_Plex_Sans, IBM_Plex_Mono } from 'next/font/google'
 import './globals.css'
 import Nav from '@/components/Nav'
+import Footer from '@/components/Footer'
 
-const newsreader = Newsreader({
-  subsets: ['latin'],
-  weight: ['400', '500', '600'],
-  variable: '--font-newsreader',
-  display: 'swap',
-})
-
-const figtree = Figtree({
-  subsets: ['latin'],
-  weight: ['300', '400', '500', '600'],
-  variable: '--font-figtree',
-  display: 'swap',
-})
+// Display: Archivo at 125% width, like front-panel lettering. Body: IBM Plex Sans.
+// Readouts, decode labels and silkscreen refs: IBM Plex Mono.
+const display = Archivo({ subsets: ['latin'], axes: ['wdth'], variable: '--font-display', display: 'swap' })
+const body = IBM_Plex_Sans({ subsets: ['latin'], weight: ['400', '500', '600'], variable: '--font-body', display: 'swap' })
+const mono = IBM_Plex_Mono({ subsets: ['latin'], weight: ['400', '500'], variable: '--font-mono', display: 'swap' })
 
 export const metadata: Metadata = {
-  title: 'Ismail Ahmed — Engineering Student & Builder',
+  metadataBase: new URL('https://personal-portfolio-webapp.vercel.app'),
+  title: { default: 'Ismail Ahmed, firmware and embedded hardware', template: '%s | Ismail Ahmed' },
   description:
-    'Second-year computer engineering student at McMaster University. 3.9/4.0 GPA. Wrote bare-metal firmware that logs motion data to an SD card at 100 Hz.',
+    'Computer Engineering co-op student at McMaster. Real-time C firmware on STM32, register-level drivers, FreeRTOS, PCB design in Altium. Seeking a firmware or hardware co-op for Summer 2027.',
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${newsreader.variable} ${figtree.variable}`}>
+    <html lang="en" className={`${display.variable} ${body.variable} ${mono.variable}`}>
       <body>
-        {/* .grain and .ambient are display:none in Soft Field — safe to delete these two lines */}
-        <div className="grain" aria-hidden="true" />
-        <div className="ambient" aria-hidden="true" />
+        <a href="#main" className="btn btn-solid fixed left-4 top-4 z-[200] -translate-y-24 focus-visible:translate-y-0">Skip to content</a>
         <Nav />
-        {children}
+        <main id="main">{children}</main>
+        <Footer />
       </body>
     </html>
   )
