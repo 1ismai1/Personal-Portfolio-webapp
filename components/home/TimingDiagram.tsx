@@ -11,7 +11,7 @@ import { useState } from 'react'
  * illustrative; replace t0/t1 below with measured values if you have them.
  */
 type Kind = 'bus' | 'wait' | 'work' | 'free'
-interface Seg { id: string; lane: 0 | 1; t0: number; t1: number; kind: Kind; label: string; explain: string; approx?: boolean }
+interface Seg { id: string; lane: 0 | 1; t0: number; t1: number; kind: Kind; label: string; shortLabel?: string; explain: string; approx?: boolean }
 
 const PERIOD = 10
 const BUSY = 1.5
@@ -26,7 +26,7 @@ const SEGS: Record<'before' | 'after', Seg[]> = {
   after: [
     { id: 'a-bus', lane: 0, t0: 0, t1: BUSY, kind: 'bus', label: 'Transfer', explain: 'Same bytes, same 1.5 ms on the wire. DMA does not make the bus faster.' },
     { id: 'a-start', lane: 1, t0: 0, t1: 0.12, kind: 'work', label: '', explain: 'The CPU points the DMA controller at a buffer and starts the transfer. Width not to scale.', approx: true },
-    { id: 'a-freed', lane: 1, t0: 0.12, t1: BUSY, kind: 'free', label: 'Freed by DMA', explain: 'Hardware copies the bytes into memory. The CPU is free for other tasks and is woken by an interrupt when the transfer completes.' },
+    { id: 'a-freed', lane: 1, t0: 0.12, t1: BUSY, kind: 'free', label: 'Freed by DMA', shortLabel: 'CPU free', explain: 'Hardware copies the bytes into memory. The CPU is free for other tasks and is woken by an interrupt when the transfer completes.' },
     { id: 'a-work', lane: 1, t0: BUSY, t1: BUSY + 0.45, kind: 'work', label: 'Filter', explain: 'Same real work as before: filter the sample and queue it. Width not to scale.', approx: true },
     { id: 'a-free', lane: 1, t0: BUSY + 0.45, t1: PERIOD, kind: 'free', label: 'Free', explain: 'Time left over for the other tasks until the next 10 ms tick.' },
   ],
@@ -82,7 +82,7 @@ export default function TimingDiagram() {
                 {s.id === 'a-freed' && <rect x={x(s.t0)} y={LANE_Y[1]} width={w} height={LANE_H} rx="2" fill="none" stroke="var(--trace)" strokeDasharray="5 4" pointerEvents="none" />}
                 {s.label && w > 60 && (
                   <text x={x(s.t0) + 10} y={LANE_Y[s.lane] + LANE_H / 2 + 4} fontSize="12.5" pointerEvents="none"
-                    className={`font-mono ${s.kind === 'work' ? 'fill-phos-ink' : 'fill-silk'}`}>{s.label}</text>
+                    className={`font-mono ${s.kind === 'work' ? 'fill-phos-ink' : 'fill-silk'}`}>{s.shortLabel ?? s.label}</text>
                 )}
               </g>
             )
@@ -91,7 +91,7 @@ export default function TimingDiagram() {
           {Array.from({ length: 11 }, (_, t) => (
             <g key={t}>
               <line x1={x(t)} x2={x(t)} y1={LANE_Y[1] + LANE_H + 6} y2={LANE_Y[1] + LANE_H + 12} stroke="var(--silk-3)" />
-              {(t % 2 === 0) && <text x={x(t)} y={LANE_Y[1] + LANE_H + 28} textAnchor="middle" fontSize="12" className="fill-silk-3 font-mono">{t} ms</text>}
+              {(t % 2 === 0) && <text x={x(t)} y={LANE_Y[1] + LANE_H + 28} textAnchor={t === PERIOD ? 'end' : 'middle'} fontSize="12" className="fill-silk-3 font-mono">{t} ms</text>}
             </g>
           ))}
           {/* Cursor pair marking the 1.5 ms */}
