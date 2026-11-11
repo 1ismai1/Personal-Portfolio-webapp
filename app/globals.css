@@ -108,8 +108,8 @@ body::before {
   .link { @apply text-silk underline decoration-phos-dim underline-offset-4; transition: color 140ms, text-decoration-color 140ms; }
   .link:hover { @apply text-phos decoration-phos; }
 
-  .prose-bench p { @apply mb-4 max-w-prose text-base text-silk-2; }
-  .prose-bench strong { @apply font-medium text-silk; }
+  .prose-bench > p { @apply mb-4 max-w-prose text-base text-silk-2; }
+  .prose-bench > p strong { @apply font-medium text-silk; }
 }
 
 /* ── Hero decode: one orchestrated load sequence ──────────────

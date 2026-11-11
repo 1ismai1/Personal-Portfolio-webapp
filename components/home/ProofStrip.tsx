@@ -18,7 +18,7 @@ export default function ProofStrip() {
   const dropped = e.stretches.reduce((s, x) => s + x.droppedSamples, 0)
   const worst = Math.max(...e.stretches.map(s => s.worstIntervalMs))
   const total = e.endMs - e.startMs
-  const W = 1000, H = 96, PAD = 8
+  const W = 1000, H = 64, PAD = 6
   const tx = (ms: number) => ((ms - e.startMs) / total) * W
   const n = e.timeline.count.length
   const bw = W / n
@@ -39,17 +39,19 @@ export default function ProofStrip() {
       <div className="grid gap-px bg-line md:grid-cols-2">
         <div className="bg-mask-800 p-5 md:p-6">
           <div className="font-mono text-xl font-medium text-silk md:text-2xl">
-            {(after.durationS / 60).toFixed(0)} min<span className="ml-2 text-sm text-trace md:text-lg">continuous</span>
+            {(after.durationS / 60).toFixed(0)} min
           </div>
-          <p className="mt-2 text-sm text-silk-2">
+          <p className="mt-1 font-mono text-xs text-trace">continuous, zero dropped samples</p>
+          <p className="mt-3 text-sm text-silk-2">
             {num(after.samples)} samples in a row at exactly {e.meta.periodMs} ms, {after.droppedSamples === 0 ? 'zero dropped' : `${after.droppedSamples} dropped`}.
           </p>
         </div>
         <div className="bg-mask-800 p-5 md:p-6">
           <div className="font-mono text-xl font-medium text-silk md:text-2xl">
-            {(gap.durationMs / 1000).toFixed(1)} s<span className="ml-2 text-sm text-fault md:text-lg">sensor unplugged</span>
+            {(gap.durationMs / 1000).toFixed(1)} s
           </div>
-          <p className="mt-2 text-sm text-silk-2">
+          <p className="mt-1 font-mono text-xs text-fault">sensor unplugged, then logging resumed in the same file</p>
+          <p className="mt-3 text-sm text-silk-2">
             I pulled the MPU-6050 out of its socket mid-log. The firmware kept retrying, the sensor came back, and logging resumed in the same file with no reboot.
           </p>
         </div>
@@ -57,6 +59,9 @@ export default function ProofStrip() {
 
       <figure className="border-t border-line p-4 md:p-6">
         <div className="relative">
+          <div className="relative mb-1 h-5 font-mono text-2xs text-fault">
+            <span className="absolute whitespace-nowrap" style={{ left: `${(tx(gap.fromMs) / W) * 100}%` }}>{mmss(gap.fromMs)} unplugged, {mmss(gap.toMs)} recovered</span>
+          </div>
           <svg viewBox={`0 0 ${W} ${H + 40}`} className="block h-auto w-full" role="img"
             aria-label={`Timeline of the ${(e.durationS / 60).toFixed(1)} minute log. Samples arrive every ${e.meta.periodMs} milliseconds except for one ${(gap.durationMs / 1000).toFixed(1)} second gap at ${mmss(gap.fromMs)}, where the sensor was unplugged on purpose.`}>
             <defs>
@@ -74,9 +79,6 @@ export default function ProofStrip() {
           </svg>
           <div className="mt-2 flex justify-between font-mono text-2xs text-silk-3">
             <span>0:00</span>
-            <span className="text-fault" style={{ position: 'absolute', left: `calc(${(tx(gap.fromMs) / W) * 100}% + 8px)`, top: 0 }}>
-              {mmss(gap.fromMs)} unplugged, {mmss(gap.toMs)} recovered
-            </span>
             <span>{mmss(e.endMs)}</span>
           </div>
         </div>

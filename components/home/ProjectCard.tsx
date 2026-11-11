@@ -2,6 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { StatusBadge } from '@/components/kit'
 import type { Project } from '@/content/projects'
+import PacketArt from './PacketArt'
 
 /**
  * One card per project, generated from content/projects.ts.
@@ -27,10 +28,13 @@ export default function ProjectCard({ project: p, feature = false }: { project: 
           <div className="absolute inset-0 bg-gradient-to-t from-mask-950/60 to-transparent" aria-hidden="true" />
         </div>
       )}
+      {!p.image && p.group === 'embedded' && (
+        <div className="aspect-[16/9] shrink-0 border-b border-line bg-mask-950"><PacketArt /></div>
+      )}
       <div className="flex min-w-0 flex-1 flex-col gap-4 p-5 md:p-7">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <span className="ref">{p.kind}</span>
-          <StatusBadge tone={p.status.tone}>{p.status.label}</StatusBadge>
+          {p.status.tone !== 'neutral' && <StatusBadge tone={p.status.tone}>{p.status.label}</StatusBadge>}
         </div>
         <div>
           <h3 className={`display ${feature ? 'text-xl md:text-2xl' : 'text-xl'}`}>

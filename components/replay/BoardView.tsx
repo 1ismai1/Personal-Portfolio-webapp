@@ -40,6 +40,8 @@ function Board({ data, mode, pos, active, onActive }: Props) {
       // The Altium export writes alpha 0 on some materials; they are opaque parts.
       mat.transparent = false; mat.opacity = 1; mat.side = THREE.DoubleSide
       mat.metalness = Math.min(mat.metalness, 0.4); mat.roughness = Math.max(mat.roughness, 0.55)
+      // The bare board comes out as pure RGB green; pull it to a real soldermask colour.
+      if (mat.color.g > 0.15 && mat.color.r < 0.05 && mat.color.b < 0.05) { mat.color.set('#1d6b45'); mat.roughness = 0.5 }
       m.material = mat
     })
     return s
@@ -102,7 +104,7 @@ export default function BoardView(props: Props & { running: boolean; onReady?: (
     <Canvas
       dpr={[1, 2]}
       frameloop={running ? 'always' : 'never'}
-      camera={{ position: [0, 9.5, 12.5], fov: 34 }}
+      camera={{ position: [0, 8.2, 10.8], fov: 34 }}
       gl={{ antialias: true, alpha: true, powerPreference: 'low-power' }}
       onPointerMissed={() => props.onActive(null)}
       aria-hidden="true"
@@ -110,6 +112,8 @@ export default function BoardView(props: Props & { running: boolean; onReady?: (
       <ambientLight intensity={1.4} />
       <directionalLight position={[5, 10, 6]} intensity={2.4} />
       <directionalLight position={[-6, -8, -4]} intensity={1.1} color="#5CD6C0" />
+      {/* A fixed floor grid, so the tilt reads against something level. */}
+      <gridHelper args={[18, 18, "#2B6E63", "#162623"]} position={[0, -3.4, 0]} />
       <Suspense fallback={null}>
         <Board {...rest} />
       </Suspense>

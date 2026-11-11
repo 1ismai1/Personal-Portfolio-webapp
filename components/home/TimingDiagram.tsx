@@ -19,7 +19,7 @@ const BUSY = 1.5
 const SEGS: Record<'before' | 'after', Seg[]> = {
   before: [
     { id: 'b-bus', lane: 0, t0: 0, t1: BUSY, kind: 'bus', label: 'Transfer', explain: 'The sensor read (and SD bytes) cross the bus. The wire time is set by the bus speed, so it is the same before and after.' },
-    { id: 'b-wait', lane: 1, t0: 0, t1: BUSY, kind: 'wait', label: 'Busy-wait 1.5 ms', explain: 'The CPU loops on a status flag, moving one byte at a time. For 1.5 ms of every 10 ms it can do nothing else: 15% of the period, gone.' },
+    { id: 'b-wait', lane: 1, t0: 0, t1: BUSY, kind: 'wait', label: 'Busy-wait', explain: 'The CPU loops on a status flag, moving one byte at a time. For 1.5 ms of every 10 ms it can do nothing else: 15% of the period, gone.' },
     { id: 'b-work', lane: 1, t0: BUSY, t1: BUSY + 0.45, kind: 'work', label: 'Filter', explain: 'Real work: run the complementary filter and queue the sample for the SD task. Width not to scale.', approx: true },
     { id: 'b-free', lane: 1, t0: BUSY + 0.45, t1: PERIOD, kind: 'free', label: 'Free', explain: 'Time left over for the other tasks until the next 10 ms tick.' },
   ],
@@ -32,7 +32,7 @@ const SEGS: Record<'before' | 'after', Seg[]> = {
   ],
 }
 
-const X0 = 96, X1 = 984, LANE_Y = [34, 96], LANE_H = 40
+const X0 = 52, X1 = 748, LANE_Y = [34, 92], LANE_H = 44
 const x = (t: number) => X0 + (t / PERIOD) * (X1 - X0)
 const fill: Record<Kind, string> = { bus: 'var(--trace-dim)', wait: 'url(#hatch)', work: 'var(--phos)', free: 'var(--mask-700)' }
 const stroke: Record<Kind, string> = { bus: 'var(--trace)', wait: 'var(--fault)', work: 'var(--phos)', free: 'var(--line-2)' }
@@ -57,7 +57,7 @@ export default function TimingDiagram() {
       </div>
 
       <div className="mt-5 overflow-x-auto">
-        <svg viewBox="0 0 1000 176" className="block h-auto w-full min-w-[620px]" role="group" aria-label={`Timing of one 10 millisecond sample period, ${state} DMA`}>
+        <svg viewBox="0 0 760 176" className="block h-auto w-full min-w-[640px]" role="group" aria-label={`Timing of one 10 millisecond sample period, ${state} DMA`}>
           <defs>
             <pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
               <rect width="8" height="8" fill="var(--fault)" opacity=".28" />
@@ -65,7 +65,7 @@ export default function TimingDiagram() {
             </pattern>
           </defs>
           {['Bus', 'CPU'].map((name, i) => (
-            <text key={name} x={X0 - 14} y={LANE_Y[i] + LANE_H / 2 + 4} textAnchor="end" className="fill-silk-2 font-mono" fontSize="13">{name}</text>
+            <text key={name} x={X0 - 10} y={LANE_Y[i] + LANE_H / 2 + 4} textAnchor="end" className="fill-silk-2 font-mono" fontSize="13">{name}</text>
           ))}
           {segs.map(s => {
             const w = x(s.t1) - x(s.t0), on = sel === s.id

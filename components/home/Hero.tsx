@@ -61,7 +61,7 @@ function TraceRow({ bytes, first, last, className = '' }: { bytes: ByteInfo[]; f
         <span className="text-center text-silk-3">{last ? 'P' : ''}</span>
       </div>
       <div className="relative mt-2 overflow-hidden">
-        <svg viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="none" className="block h-[72px] w-full md:h-[84px]">
+        <svg viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="none" className="block h-[52px] w-full md:h-[84px]">
           <path d={sda} fill="none" stroke="var(--phos)" strokeWidth="1.5" vectorEffect="non-scaling-stroke" strokeLinejoin="round" />
           <path d={scl} fill="none" stroke="var(--trace)" strokeWidth="1.5" vectorEffect="non-scaling-stroke" strokeLinejoin="round" />
         </svg>
@@ -76,7 +76,7 @@ export default function Hero() {
   const words = NAME.split(' ')
   let idx = 0
   return (
-    <section className="wrap pb-16 pt-28 md:pt-36" aria-labelledby="hero-name">
+    <section className="wrap pb-16 pt-24 md:pt-36" aria-labelledby="hero-name">
       <StatusBadge tone="live">Open to firmware and hardware co-ops, Summer 2027</StatusBadge>
 
       <h1 id="hero-name" aria-label="Ismail Ahmed" className="display mt-6 text-[clamp(2.75rem,9.4vw,6.75rem)] uppercase leading-[0.95]">
@@ -106,15 +106,20 @@ export default function Hero() {
         </div>
       </div>
 
-      <div className="mt-10 grid items-start gap-10 lg:grid-cols-[minmax(0,1fr)_400px]">
+      <div className="mt-7 grid items-start gap-6 lg:mt-10 lg:gap-10 lg:grid-cols-[minmax(0,1fr)_400px]">
         <div>
           <p className="max-w-[46ch] text-lg text-silk">
             I write real-time firmware in C for STM32, design the boards it runs on, and prove both with a logic analyzer.
           </p>
-          <p className="mt-3 max-w-[58ch] text-sm text-silk-2">
+          {/* Small screens: the hard number sits above the buttons so it lands on the first screen. */}
+          <a href="#timing" className="mt-4 flex items-baseline gap-3 border-y border-line py-3 no-underline lg:hidden">
+            <span className="whitespace-nowrap font-mono text-xl font-medium text-silk">−1.5<span className="ml-1 text-sm text-phos">ms</span></span>
+            <span className="text-xs text-silk-2">CPU busy-waiting removed from every 10 ms sample, measured on a logic analyzer</span>
+          </a>
+          <p className="mt-3 hidden max-w-[58ch] text-sm text-silk-2 lg:block">
             Computer Engineering co-op student at McMaster University, Level 2. Available full-time and on-site, May to August 2027.
           </p>
-          <div className="mt-7 flex flex-wrap gap-3">
+          <div className="mt-5 flex flex-wrap gap-3 lg:mt-7">
             <a href="mailto:Ismail.ahm22d@gmail.com" className="btn btn-solid">Email me</a>
             <a href="#work" className="btn btn-line">See the work</a>
             <a href="https://github.com/1ismai1" target="_blank" rel="noopener noreferrer" className="btn btn-line">GitHub</a>
@@ -122,7 +127,7 @@ export default function Hero() {
         </div>
 
         {/* The one hard number, drawn as a cursor measurement. */}
-        <a href="#timing" className="panel group block p-5 no-underline transition-transform duration-base ease-spring hover:-translate-y-1 active:translate-y-0 md:p-6">
+        <a href="#timing" className="panel group hidden p-5 lg:block no-underline transition-transform duration-base ease-spring hover:-translate-y-1 active:translate-y-0 md:p-6">
           <div className="flex items-baseline justify-between font-mono text-xs text-silk-3">
             <span>Δt per 10 ms sample</span>
             <span className="text-trace">measured</span>
@@ -140,6 +145,9 @@ export default function Hero() {
             <span className="link ml-1 whitespace-nowrap">See the timing</span>
           </p>
         </a>
+        <p className="max-w-[58ch] text-sm text-silk-2 lg:hidden">
+          Computer Engineering co-op student at McMaster University, Level 2. Available full-time and on-site, May to August 2027.
+        </p>
       </div>
     </section>
   )

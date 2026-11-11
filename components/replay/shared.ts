@@ -21,7 +21,7 @@ export const MODES: { id: Mode; label: string; blurb: string }[] = [
   {
     id: 'gyro',
     label: 'Gyro only',
-    blurb: 'Angle from integrating rotation rate. Smooth, but small errors add up, so it drifts away from the truth.',
+    blurb: 'Angle from integrating rotation rate. Smooth, but errors add up and nothing pulls the angle back, so it drifts, and it loses track once the board flips over.',
   },
   {
     id: 'filt',
