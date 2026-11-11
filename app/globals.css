@@ -127,10 +127,12 @@ body::before {
    Everything is visible by default, including with JS or motion disabled. */
 .work-arrival { position: relative; }
 .work-signal { position: absolute; top: -24px; left: 0; right: 0; height: 2px; overflow: hidden; pointer-events: none; }
-.work-signal span { position: absolute; inset: 0; background: var(--trace); opacity: 0; transform-origin: left; }
-.work-signal span + span { width: 18%; background: var(--phos); }
-.project-arrival { display: none; position: absolute; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
+.work-signal span { position: absolute; inset: 0; background: var(--trace); opacity: .65; transform-origin: left; }
+.work-signal span + span { width: 18%; background: var(--phos); opacity: 1; transform: translateX(455%); }
+.project-arrival { --arrival-opacity: .45; position: absolute; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; opacity: var(--arrival-opacity); }
 .project-arrival svg { position: absolute; top: 92px; right: -6%; width: min(70%, 900px); height: auto; }
+.arrival-wave-cover { transform: translateX(101%); }
+.arrival-scan { opacity: 0; }
 
 @media (prefers-reduced-motion: no-preference) {
   .work-arrival[data-arrived] .work-signal span:first-child { animation: work-connect 900ms var(--ease-out) both; }
@@ -156,13 +158,13 @@ body::before {
 @keyframes work-connect {
   0% { transform: scaleX(0); opacity: .9; }
   65% { transform: scaleX(1); opacity: .65; }
-  100% { transform: scaleX(1); opacity: 0; }
+  100% { transform: scaleX(1); opacity: .65; }
 }
 @keyframes work-pulse {
   0% { transform: translateX(-110%); opacity: 0; }
   15% { opacity: 1; }
   85% { opacity: 1; }
-  100% { transform: translateX(560%); opacity: 0; }
+  100% { transform: translateX(455%); opacity: 1; }
 }
 @keyframes work-heading {
   from { transform: translateX(-20px); opacity: .55; }
@@ -174,8 +176,7 @@ body::before {
 }
 @keyframes arrival-finish {
   0% { opacity: 0; }
-  16%, 65% { opacity: .45; }
-  100% { opacity: 0; }
+  16%, 100% { opacity: var(--arrival-opacity); }
 }
 @keyframes arrival-uncover { from { transform: translateX(0); } to { transform: translateX(101%); } }
 @keyframes arrival-scan {
@@ -190,8 +191,7 @@ body::before {
 }
 @keyframes packet-send {
   0% { transform: translateX(-360px); opacity: 0; }
-  30%, 60% { transform: translateX(0); opacity: 1; }
-  100% { transform: translateX(620px); opacity: 0; }
+  60%, 100% { transform: translateX(0); opacity: 1; }
 }
 @keyframes bank-receive { 0%, 30% { opacity: .2; } 65%, 100% { opacity: 1; } }
 @keyframes logger-open { from { transform: translateX(12px); opacity: .55; } to { transform: none; opacity: 1; } }
@@ -200,9 +200,5 @@ body::before {
 
 @media (max-width: 767px) {
   .project-arrival svg { top: 100px; right: -15%; width: 110%; }
-  @keyframes arrival-finish {
-    0% { opacity: 0; }
-    16%, 65% { opacity: .25; }
-    100% { opacity: 0; }
-  }
+  .project-arrival { --arrival-opacity: .25; }
 }

@@ -2,7 +2,7 @@
 
 User request: make the site feel more animated, specifically the hero-to-work transition and opening IMU Logger, Sensor Shield, and OTA Firmware Update.
 
-Use the existing bench palette and type. One signal sweep introduces the work heading and lead card when reached by scrolling or the hero link. Each of the three project headers has a distinct, brief entrance: waveform acquisition, board layers aligning, and moving update packets. Decorative graphics fade away after the entrance; the content remains readable and interactive.
+Use the existing bench palette and type. One signal sweep introduces the work heading and lead card when reached by scrolling or the hero link. Each of the three project headers has a distinct, brief entrance: waveform acquisition, board layers aligning, and moving update packets. Per the user's follow-up, the graphics remain visible in their settled state after the entrance; the content remains readable and interactive. Reduced motion shows the same static graphics without animation.
 
 Approaches considered: a global navigation overlay could connect both pages but introduces navigation state and can obstruct slow routes; a heavy animation library is unnecessary. Selected implementation: CSS project entrances and a small IntersectionObserver for the work section. Keep normal Next links, browser history, modified clicks, and native anchor navigation.
 

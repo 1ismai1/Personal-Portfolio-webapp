@@ -43,6 +43,7 @@ try {
     await page.$eval('#work', el => el.scrollIntoView({ behavior: 'instant' }))
     if (output) await page.screenshot({ path: join(output, `motion-work-${width}.png`) })
     await finish('#work')
+    assert.ok(await page.$eval('.work-signal span', el => Number(getComputedStyle(el).opacity) > 0), 'Work signal must remain visible')
     await overflow()
     for (const [slug, name] of Object.entries(entrances)) {
       await page.locator(`a[href="/projects/${slug}"]`).click()
@@ -52,7 +53,8 @@ try {
       await freeze('.project-header')
       if (output) await page.screenshot({ path: join(output, `motion-${slug}-${width}.png`) })
       await finish('.project-header')
-      assert.equal(await page.$eval('.project-arrival', el => getComputedStyle(el).opacity), '0')
+      assert.ok(await page.$eval('.project-arrival', el => Number(getComputedStyle(el).opacity) > 0), 'Project graphic must remain visible')
+      if (slug === 'ota-update') assert.ok(await page.$$eval('.arrival-packet', els => els.every(el => getComputedStyle(el).opacity === '1' && getComputedStyle(el).transform === 'matrix(1, 0, 0, 1, 0, 0)')), 'OTA packets must settle in place')
       await overflow()
       if (output) await page.screenshot({ path: join(output, `motion-${slug}-${width}-settled.png`) })
       await page.goBack()
@@ -68,7 +70,7 @@ try {
   for (const slug of Object.keys(entrances)) {
     await page.goto(`${base}/projects/${slug}`, { waitUntil: 'networkidle0' })
     assert.equal(await page.$eval('.project-header h1', el => getComputedStyle(el).animationName), 'none')
-    assert.equal(await page.$eval('.project-arrival', el => getComputedStyle(el).display), 'none')
+    assert.ok(await page.$eval('.project-arrival', el => getComputedStyle(el).display !== 'none' && Number(getComputedStyle(el).opacity) > 0), 'Reduced motion keeps static artwork visible')
   }
   await page.goto(`${base}/#work`, { waitUntil: 'networkidle0' })
   assert.equal(await page.$eval('#work h2', el => getComputedStyle(el).animationName), 'none')
