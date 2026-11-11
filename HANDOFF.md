@@ -1,5 +1,25 @@
 # HANDOFF: finishing the redesign
 
+## Firmware consistency audit, November 11, 2026
+
+User confirmed GitHub is current and the supplied local main.c is older. Checked current main.c (blob c20d13b10775c9fca126933a451beca3cb5ae4ae), FreeRTOS config/hooks, diskio and measurement documentation. Corrected task-count context, scheduling/drop guarantees, DMA polling, unbounded waits, power-loss wording, calibration and clock details. The timing diagram is explicitly conceptual and no longer claims zero total polling. See docs/imu-firmware-audit.md for evidence and scope. Firmware files were not changed.
+
+## Motion update, November 11, 2026
+
+Follow-up preference: keep the entrance artwork on screen. The work signal, waveform, aligned board, and OTA packets now remain visible after settling, including static artwork in reduced-motion mode.
+
+Added the four requested entrances: a signal sweep when Embedded work enters view, plus waveform, board-layer, and packet sequences for IMU Logger, Sensor Shield, and OTA. Graphics finish and fade away; reduced motion disables all four. No new dependencies. Converted the hero's internal anchors to Next Link after reproducing a null-history-state Back-button failure. Production browser checks pass at 390/1440, including Back, direct navigation, reduced motion, no-JavaScript content, overflow and runtime errors. TypeScript/build pass; home initial JavaScript is now 119 kB. Details and repeatable browser check: docs/superpowers/plans/2026-11-11-project-motion.md and scripts/check-motion.mjs.
+
+## Completion update, November 11, 2026
+
+Implemented the content pass and clock section; Ismail confirmed all four task descriptions. Ported all four case studies and removed old components/CSS. Expanded OTA using the repository Ismail supplied: `ronitbhanot4/stm32-ota-bootloader` (format, sender and 23 tests checked at `18ee3f0`). Receiver protocol remains a draft; hardware verification is stated only for the bootloader jump.
+
+Added social metadata, 1200x630 sharing artwork and favicon. Removed unused Supabase, obsolete standalone files and five byte-identical image duplicates. Documented data/model replacement. ProofStrip now handles zero/multiple gaps and unavailable averages; controls meet the 44px height rule and the capture dialog is labelled. Small project photos use the generated sharing image as a social fallback.
+
+Verification: TypeScript and production build pass. Home initial JavaScript remains 118 kB. All seven routes checked at 390 and 1440 px for overflow, image alternatives, broken images and nested controls. Capture keyboard focus returns correctly; reduced-motion home decodes immediately and replay stays paused. Final Lighthouse mobile: home performance 96 / accessibility 100; IMU Logger performance 100 / accessibility 100. All 14 page/viewport automated accessibility scans pass.
+
+Still requires Ismail: engineering-notebook bug details, clock PNG, resume PDF, video posters, real-board axis confirmation and measured timing widths (currently disclosed as illustrative). GPA remains absent. The font system remains next/font. Full physical-axis validation and exhaustive manual keyboard testing remain open. Original checklist below is retained as the specification, not an indication that completed work needs repeating.
+
 Branch: `redesign-fable`. Do not merge to main and do not deploy until Ismail says so.
 
 The design system, architecture and the three signature pieces are done. What is left is content and polish. **No design judgment is needed:** every task names the file, the change, the component to use and how to check it. Read `CLAUDE.md` first for the stack and design rules.

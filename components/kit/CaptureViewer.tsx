@@ -38,6 +38,7 @@ export default function CaptureViewer({ src, alt, width, height, caption }: Prop
 
       <dialog
         ref={dialog}
+        aria-label={`Capture viewer: ${alt}`}
         onClick={e => { if (e.target === dialog.current) dialog.current?.close() }}
         className="m-auto h-[92vh] w-[96vw] max-w-[1600px] rounded border border-line-2 bg-mask-800 p-0 text-silk-2 shadow-floating backdrop:bg-mask-950/80"
       >

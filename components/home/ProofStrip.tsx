@@ -1,4 +1,5 @@
 import endurance from '@/public/data/endurance.json'
+import { useId } from 'react'
 
 /**
  * "Measured, not claimed": every number here is computed from LOG_30MIN.CSV by
@@ -14,6 +15,7 @@ const num = (n: number) => n.toLocaleString('en-US')
 export default function ProofStrip() {
   const e = endurance
   const gap = e.gaps[0]
+  const hatchId = useId()
   const after = e.stretches[e.stretches.length - 1]
   const dropped = e.stretches.reduce((s, x) => s + x.droppedSamples, 0)
   const worst = Math.max(...e.stretches.map(s => s.worstIntervalMs))
@@ -36,46 +38,44 @@ export default function ProofStrip() {
 
   return (
     <div className="panel overflow-hidden">
-      <div className="grid gap-px bg-line md:grid-cols-2">
+      <div className={`grid gap-px bg-line ${gap ? 'md:grid-cols-2' : ''}`}>
         <div className="bg-mask-800 p-5 md:p-6">
           <div className="font-mono text-xl font-medium text-silk md:text-2xl">
             {(after.durationS / 60).toFixed(0)} min
           </div>
-          <p className="mt-1 font-mono text-xs text-trace">continuous, zero dropped samples</p>
+          <p className="mt-1 font-mono text-xs text-trace">{after.droppedSamples === 0 ? 'continuous, zero dropped samples' : `${after.droppedSamples} dropped samples`}</p>
           <p className="mt-3 text-sm text-silk-2">
-            {num(after.samples)} samples in a row at exactly {e.meta.periodMs} ms, {after.droppedSamples === 0 ? 'zero dropped' : `${after.droppedSamples} dropped`}.
+            {num(after.samples)} samples with a {e.meta.periodMs} ms target interval, {after.droppedSamples === 0 ? 'zero dropped' : `${after.droppedSamples} dropped`}.
           </p>
         </div>
-        <div className="bg-mask-800 p-5 md:p-6">
+        {gap && <div className="bg-mask-800 p-5 md:p-6">
           <div className="font-mono text-xl font-medium text-silk md:text-2xl">
             {(gap.durationMs / 1000).toFixed(1)} s
           </div>
-          <p className="mt-1 font-mono text-xs text-fault">sensor unplugged, then logging resumed in the same file</p>
+          <p className="mt-1 font-mono text-xs text-fault">{e.gaps.length === 1 ? 'sensor unplugged, then logging resumed in the same file' : `${e.gaps.length} interruptions in the log`}</p>
           <p className="mt-3 text-sm text-silk-2">
-            I pulled the MPU-6050 out of its socket mid-log. The firmware kept retrying, the sensor came back, and logging resumed in the same file with no reboot.
+            {e.gaps.length === 1 ? 'I pulled the MPU-6050 out of its socket mid-log. The firmware kept retrying, the sensor came back, and logging resumed in the same file with no reboot.' : 'The timeline marks each interruption. The duration above is the first gap; the continuous stretch is the final recording segment.'}
           </p>
-        </div>
+        </div>}
       </div>
 
       <figure className="border-t border-line p-4 md:p-6">
         <div className="relative">
-          <div className="relative mb-1 h-5 font-mono text-2xs text-fault">
-            <span className="absolute whitespace-nowrap" style={{ left: `${(tx(gap.fromMs) / W) * 100}%` }}>{mmss(gap.fromMs)} unplugged, {mmss(gap.toMs)} recovered</span>
-          </div>
+          {gap && <p className="mb-2 font-mono text-2xs text-fault">{mmss(gap.fromMs)} interrupted, {mmss(gap.toMs)} resumed{e.gaps.length > 1 ? `; ${e.gaps.length} interruptions total` : ''}</p>}
           <svg viewBox={`0 0 ${W} ${H + 40}`} className="block h-auto w-full" role="img"
-            aria-label={`Timeline of the ${(e.durationS / 60).toFixed(1)} minute log. Samples arrive every ${e.meta.periodMs} milliseconds except for one ${(gap.durationMs / 1000).toFixed(1)} second gap at ${mmss(gap.fromMs)}, where the sensor was unplugged on purpose.`}>
+            aria-label={`Timeline of the ${(e.durationS / 60).toFixed(1)} minute log, with a ${e.meta.periodMs} millisecond target interval and ${e.gaps.length} interruptions.`}>
             <defs>
-              <pattern id="gap-hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+              <pattern id={hatchId} width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
                 <rect width="2.5" height="6" fill="var(--fault)" />
               </pattern>
             </defs>
             <rect x="0" y="0" width={W} height={H} fill="var(--mask-950)" rx="2" />
             <line x1="0" x2={W} y1={H / 2} y2={H / 2} stroke="var(--line)" />
             {env}
-            <rect x={tx(gap.fromMs)} y="0" width={Math.max(tx(gap.toMs) - tx(gap.fromMs), 4)} height={H} fill="url(#gap-hatch)" />
+            {e.gaps.map(g => <rect key={g.fromMs} x={tx(g.fromMs)} y="0" width={Math.max(tx(g.toMs) - tx(g.fromMs), 4)} height={H} fill={`url(#${hatchId})`} />)}
             {/* interval sparkline lane */}
             <path d={spark} transform={`translate(0 ${H + 6})`} fill="none" stroke="var(--phos)" strokeWidth="1.5" />
-            <line x1={tx(gap.fromMs)} x2={tx(gap.fromMs)} y1="0" y2={H + 24} stroke="var(--fault)" />
+            {e.gaps.map(g => <line key={g.fromMs} x1={tx(g.fromMs)} x2={tx(g.fromMs)} y1="0" y2={H + 24} stroke="var(--fault)" />)}
           </svg>
           <div className="mt-2 flex justify-between font-mono text-2xs text-silk-3">
             <span>0:00</span>
@@ -84,9 +84,9 @@ export default function ProofStrip() {
         </div>
         <figcaption className="mt-4 flex flex-wrap gap-x-8 gap-y-2 font-mono text-xs text-silk-3">
           <span><span className="text-trace">■</span> roll range per 5 s</span>
-          <span><span className="text-phos">━</span> sample interval: worst {worst} ms, average {after.avgIntervalMs.toFixed(3)} ms</span>
+          <span><span className="text-phos">━</span> sample interval: worst {worst} ms, average {Number.isFinite(after.avgIntervalMs) ? `${after.avgIntervalMs.toFixed(3)} ms` : 'unavailable for a single sample'}</span>
           <span>{num(e.totalSamples)} samples over {(e.durationS / 60).toFixed(1)} min</span>
-          <span>{dropped} dropped outside the test, {e.gaps.length} gap (deliberate)</span>
+          <span>{dropped} dropped outside interruptions, {e.gaps.length} {e.gaps.length === 1 ? 'gap' : 'gaps'}</span>
         </figcaption>
       </figure>
     </div>

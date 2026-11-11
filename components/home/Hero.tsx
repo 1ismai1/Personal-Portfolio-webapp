@@ -1,7 +1,8 @@
 import { StatusBadge } from '@/components/kit'
+import Link from 'next/link'
 
 /**
- * Hero. Server component, zero client JS: the H1 is plain HTML (so it is the
+ * Hero. Server-rendered: the H1 is plain HTML (so it is the
  * LCP element and paints immediately) and the decode animation is CSS only.
  * The waveform is the real I2C encoding of the ASCII bytes of the name:
  * MSB first, an ACK bit after each byte, SDA only changing while SCL is low.
@@ -112,22 +113,22 @@ export default function Hero() {
             I write real-time firmware in C for STM32, design the boards it runs on, and prove both with a logic analyzer.
           </p>
           {/* Small screens: the hard number sits above the buttons so it lands on the first screen. */}
-          <a href="#timing" className="mt-4 flex items-baseline gap-3 border-y border-line py-3 no-underline lg:hidden">
+          <Link href="#timing" className="mt-4 flex items-baseline gap-3 border-y border-line py-3 no-underline lg:hidden">
             <span className="whitespace-nowrap font-mono text-xl font-medium text-silk">−1.5<span className="ml-1 text-sm text-phos">ms</span></span>
             <span className="text-xs text-silk-2">CPU busy-waiting removed from every 10 ms sample, measured on a logic analyzer</span>
-          </a>
+          </Link>
           <p className="mt-3 hidden max-w-[58ch] text-sm text-silk-2 lg:block">
             Computer Engineering co-op student at McMaster University, Level 2. Available full-time and on-site, May to August 2027.
           </p>
           <div className="mt-5 flex flex-wrap gap-3 lg:mt-7">
             <a href="mailto:Ismail.ahm22d@gmail.com" className="btn btn-solid">Email me</a>
-            <a href="#work" className="btn btn-line">See the work</a>
+            <Link href="#work" className="btn btn-line">See the work</Link>
             <a href="https://github.com/1ismai1" target="_blank" rel="noopener noreferrer" className="btn btn-line">GitHub</a>
           </div>
         </div>
 
         {/* The one hard number, drawn as a cursor measurement. */}
-        <a href="#timing" className="panel group hidden p-5 lg:block no-underline transition-transform duration-base ease-spring hover:-translate-y-1 active:translate-y-0 md:p-6">
+        <Link href="#timing" className="panel group hidden p-5 lg:block no-underline transition-transform duration-base ease-spring hover:-translate-y-1 active:translate-y-0 md:p-6">
           <div className="flex items-baseline justify-between font-mono text-xs text-silk-3">
             <span>Δt per 10 ms sample</span>
             <span className="text-trace">measured</span>
@@ -144,7 +145,7 @@ export default function Hero() {
             Removed 1.5 ms of CPU busy-waiting per 10 ms sample by moving sensor reads and SD writes to DMA.
             <span className="link ml-1 whitespace-nowrap">See the timing</span>
           </p>
-        </a>
+        </Link>
         <p className="max-w-[58ch] text-sm text-silk-2 lg:hidden">
           Computer Engineering co-op student at McMaster University, Level 2. Available full-time and on-site, May to August 2027.
         </p>

@@ -1,36 +1,21 @@
-/**
- * Card art for the OTA project until there is a real photo or capture:
- * a schematic of the update image and the acknowledged-chunk stream.
- * Illustrative only: field order and chunk count are not to scale.
- */
+/** v1 fields from the OTA repository. Field widths and the transfer example are illustrative. */
+const rows = [
+  [['magic', '4 B'], ['header_version', '2 B'], ['header_size', '2 B'], ['fw_version', '4 B'], ['payload_size', '4 B'], ['payload_crc32', '4 B']],
+  [['load_addr', '4 B'], ['flags', '4 B'], ['header_crc32', '4 B'], ['reserved', '32 B'], ['signature', '64 B']],
+]
 export default function PacketArt() {
-  const chunks = [0, 1, 2, 3, 4, 5]
   return (
-    <svg viewBox="0 0 640 360" className="block h-full w-full" role="img"
-      aria-label="Diagram: an update image with version, length and CRC-32 fields, sent over UART in chunks that are each acknowledged. One lost acknowledgement triggers a resend.">
-      <g fontFamily="var(--font-mono)" fontSize="13">
-        <text x="40" y="62" fill="var(--silk-3)">image</text>
-        {[['version', 40, 96], ['length', 140, 96], ['CRC-32', 240, 104]].map(([t, x, w]) => (
-          <g key={t as string}>
-            <rect x={x as number} y="76" width={w as number} height="44" rx="2" fill="var(--mask-700)" stroke="var(--phos-dim)" />
-            <text x={(x as number) + 12} y="103" fill="var(--phos)">{t}</text>
-          </g>
-        ))}
-        <rect x="348" y="76" width="252" height="44" rx="2" fill="var(--mask-800)" stroke="var(--line-2)" />
-        <text x="360" y="103" fill="var(--silk-2)">firmware build</text>
-
-        <text x="40" y="186" fill="var(--silk-3)">host, UART</text>
-        <text x="40" y="290" fill="var(--silk-3)">bootloader</text>
-        {chunks.map(i => {
-          const x = 150 + i * 76, lost = i === 3
-          return (
-            <g key={i}>
-              <rect x={x} y="164" width="60" height="34" rx="2" fill={lost ? 'var(--fault-dim, #7A2E24)' : 'var(--trace-dim)'} stroke={lost ? 'var(--fault)' : 'var(--trace)'} />
-              <text x={x + 30} y="186" textAnchor="middle" fill="var(--silk)">{lost ? 'resend' : `#${i < 3 ? i + 1 : i}`}</text>
-              <line x1={x + 30} y1="204" x2={x + 30} y2="262" stroke={lost ? 'var(--fault)' : 'var(--silk-3)'} strokeDasharray={lost ? '3 4' : undefined} />
-              <text x={x + 30} y="290" textAnchor="middle" fill={lost ? 'var(--fault)' : 'var(--trace)'}>{lost ? 'no ACK' : 'ACK'}</text>
-            </g>
-          )
+    <svg viewBox="0 0 640 360" className="block h-full w-full" role="img" aria-label="The v1 image has a 128-byte header containing magic, format version, header size, firmware version, payload size and CRC, load address, flags, header CRC, reserved bytes and a future signature. The payload is sent in acknowledged chunks of up to 256 bytes.">
+      <g fontFamily="var(--font-mono)">
+        <text x="32" y="38" fontSize="13" fill="var(--silk-2)">128-byte header, then firmware payload</text>
+        {rows.map((row,r) => row.map(([name,size],i) => {
+          const w=576/row.length, x=32+i*w, y=55+r*68
+          return <g key={name}><rect x={x} y={y} width={w-5} height="57" rx="2" fill="var(--mask-700)" stroke="var(--phos-dim)" /><text x={x+7} y={y+23} fontSize="10" fill="var(--phos)">{name}</text><text x={x+7} y={y+43} fontSize="11" fill="var(--silk-2)">{size}</text></g>
+        }))}
+        <text x="32" y="220" fontSize="12" fill="var(--silk-2)">UART · up to 256 bytes per chunk</text>
+        {['START','DATA 0','DATA 1','retry 1','END'].map((label,i) => {
+          const x=32+i*116, retry=i===3
+          return <g key={label}><rect x={x} y="239" width="108" height="35" rx="2" fill="var(--mask-800)" stroke={retry?'var(--fault)':'var(--trace)'} /><text x={x+54} y="262" textAnchor="middle" fontSize="12" fill="var(--silk)">{label}</text><path d={`M${x+54} 280 v23`} stroke="var(--silk-3)" /><text x={x+54} y="325" textAnchor="middle" fontSize="12" fill={i===2?'var(--fault)':'var(--trace)'}>{i===2?'ACK lost':'ACK'}</text></g>
         })}
       </g>
     </svg>

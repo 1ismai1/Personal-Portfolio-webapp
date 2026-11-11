@@ -15,6 +15,14 @@ export const metadata: Metadata = {
   title: { default: 'Ismail Ahmed, firmware and embedded hardware', template: '%s | Ismail Ahmed' },
   description:
     'Computer Engineering co-op student at McMaster. Real-time C firmware on STM32, register-level drivers, FreeRTOS, PCB design in Altium. Seeking a firmware or hardware co-op for Summer 2027.',
+  openGraph: {
+    title: 'Ismail Ahmed, firmware and embedded hardware',
+    description: 'Real-time firmware, register-level drivers and embedded hardware. McMaster Computer Engineering. Available for Summer 2027 co-op.',
+    url: 'https://personal-portfolio-webapp.vercel.app',
+    siteName: 'Ismail Ahmed',
+    type: 'website',
+  },
+  twitter: { card: 'summary_large_image' },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

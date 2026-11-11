@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation'
 import { StatRow, StatusBadge } from '@/components/kit'
 import { getProject, projects } from '@/content/projects'
 import { bodies } from './bodies'
+import ProjectArrival from '@/components/ProjectArrival'
 
 /**
  * One route for every project. The header comes from content/projects.ts;
@@ -14,7 +15,14 @@ export const generateStaticParams = () => projects.map(p => ({ slug: p.slug }))
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const p = getProject((await params).slug)
-  return p ? { title: p.title, description: p.lead ?? p.summary } : {}
+  if (!p) return {}
+  const description = p.lead ?? p.summary
+  const images = p.image && p.image.width >= 600 && p.image.height >= 315 ? [{ url: p.image.src, width: p.image.width, height: p.image.height, alt: p.image.alt }] : ['/opengraph-image']
+  return {
+    title: p.title, description,
+    openGraph: { title: p.title, description, url: `/projects/${p.slug}`, siteName: 'Ismail Ahmed', type: 'website', images },
+    twitter: { card: 'summary_large_image', title: p.title, description, images },
+  }
 }
 
 export default async function ProjectPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -25,8 +33,10 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
   const next = projects[(i + 1) % projects.length]
 
   return (
-    <article>
-      <header className="wrap pb-10 pt-28 md:pt-36">
+    <article key={p.slug} data-project-motion={p.slug}>
+      <header className="project-header relative isolate overflow-hidden">
+        <ProjectArrival slug={p.slug} />
+        <div className="wrap relative pb-10 pt-28 md:pt-36">
         <Link href="/#work" className="link text-sm">All projects</Link>
         <div className="mt-8 flex flex-wrap items-center gap-3">
           <span className="ref">{p.kind}</span>
@@ -43,6 +53,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
           <a href={p.repo} target="_blank" rel="noopener noreferrer" className="btn btn-line mt-7">Source on GitHub</a>
         )}
         {p.stats && p.stats.length > 1 && <StatRow stats={p.stats} className="mt-10" />}
+        </div>
       </header>
 
       {Body ? <Body /> : (
