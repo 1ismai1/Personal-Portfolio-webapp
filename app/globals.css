@@ -79,7 +79,7 @@ body::before {
 
   /* Small instrument controls (segmented toggles, transport buttons). */
   .ctl {
-    @apply inline-flex min-h-[36px] items-center justify-center gap-1.5 rounded-xs border border-line-2 bg-mask-800 px-3 font-mono text-xs text-silk-2;
+    @apply inline-flex min-h-[44px] items-center justify-center gap-1.5 rounded-xs border border-line-2 bg-mask-800 px-3 font-mono text-xs text-silk-2;
     transition: transform 140ms var(--ease-spring), background-color 140ms, border-color 140ms, color 140ms;
   }
   .ctl:hover { @apply border-silk-3 text-silk; }

@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const p = getProject((await params).slug)
   if (!p) return {}
   const description = p.lead ?? p.summary
-  const images = p.image ? [{ url: p.image.src, width: p.image.width, height: p.image.height, alt: p.image.alt }] : ['/opengraph-image']
+  const images = p.image && p.image.width >= 600 && p.image.height >= 315 ? [{ url: p.image.src, width: p.image.width, height: p.image.height, alt: p.image.alt }] : ['/opengraph-image']
   return {
     title: p.title, description,
     openGraph: { title: p.title, description, url: `/projects/${p.slug}`, siteName: 'Ismail Ahmed', type: 'website', images },

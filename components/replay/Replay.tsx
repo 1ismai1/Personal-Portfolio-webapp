@@ -243,7 +243,7 @@ export default function Replay() {
         <dl className="grid grid-cols-2 gap-px overflow-hidden rounded-sm border border-line bg-line font-mono">
           <div className="bg-mask-900 p-3"><dt className="text-2xs text-phos">roll</dt><dd className="text-lg text-silk"><span ref={outRoll}>+000.0°</span></dd></div>
           <div className="bg-mask-900 p-3"><dt className="text-2xs text-trace">pitch</dt><dd className="text-lg text-silk"><span ref={outPitch}>+000.0°</span></dd></div>
-          <div className="col-span-2 min-h-[34px] bg-mask-900 px-3 py-2 text-xs text-fault"><span ref={outErr} /></div>
+          <div className="col-span-2 min-h-[34px] bg-mask-900 px-3 py-2 text-xs text-fault"><dt className="sr-only">Difference from filter</dt><dd><span ref={outErr} /></dd></div>
         </dl>
 
         <div>

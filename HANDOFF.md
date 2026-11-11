@@ -1,5 +1,15 @@
 # HANDOFF: finishing the redesign
 
+## Completion update, November 11, 2026
+
+Implemented the content pass and clock section; Ismail confirmed all four task descriptions. Ported all four case studies and removed old components/CSS. Expanded OTA using the repository Ismail supplied: `ronitbhanot4/stm32-ota-bootloader` (format, sender and 23 tests checked at `18ee3f0`). Receiver protocol remains a draft; hardware verification is stated only for the bootloader jump.
+
+Added social metadata, 1200x630 sharing artwork and favicon. Removed unused Supabase, obsolete standalone files and five byte-identical image duplicates. Documented data/model replacement. ProofStrip now handles zero/multiple gaps and unavailable averages; controls meet the 44px height rule and the capture dialog is labelled. Small project photos use the generated sharing image as a social fallback.
+
+Verification: TypeScript and production build pass. Home initial JavaScript remains 118 kB. All seven routes checked at 390 and 1440 px for overflow, image alternatives, broken images and nested controls. Capture keyboard focus returns correctly; reduced-motion home decodes immediately and replay stays paused. Initial Lighthouse mobile home: performance 96, accessibility 97; its replay definition-list issue was fixed, and final automated accessibility scans pass.
+
+Still requires Ismail: engineering-notebook bug details, clock PNG, resume PDF, video posters, real-board axis confirmation and measured timing widths (currently disclosed as illustrative). GPA remains absent. The font system remains next/font. Full physical-axis validation and exhaustive manual keyboard testing remain open. Original checklist below is retained as the specification, not an indication that completed work needs repeating.
+
 Branch: `redesign-fable`. Do not merge to main and do not deploy until Ismail says so.
 
 The design system, architecture and the three signature pieces are done. What is left is content and polish. **No design judgment is needed:** every task names the file, the change, the component to use and how to check it. Read `CLAUDE.md` first for the stack and design rules.

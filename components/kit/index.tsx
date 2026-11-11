@@ -32,8 +32,8 @@ export function StatusBadge({ tone = 'neutral', children }: { tone?: StatusTone;
 export function StatRow({ stats, className = '' }: { stats: Stat[]; className?: string }) {
   return (
     <dl className={`grid grid-cols-2 gap-px overflow-hidden rounded border border-line bg-line ${stats.length >= 4 ? 'lg:grid-cols-4' : 'lg:grid-cols-3'} ${className}`}>
-      {stats.map(s => (
-        <div key={s.label} className="flex flex-col-reverse justify-end gap-2 bg-mask-800 p-5 md:p-6">
+      {stats.map((s, i) => (
+        <div key={s.label} className={`flex flex-col-reverse justify-end gap-2 bg-mask-800 p-5 md:p-6 ${stats.length === 3 && i === 2 ? 'col-span-2 lg:col-span-1' : ''}`}>
           <dt className="text-xs leading-snug text-silk-3">{s.label}</dt>
           <dd className="font-mono text-xl font-medium text-silk md:text-2xl">
             {s.value}

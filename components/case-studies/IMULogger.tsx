@@ -44,10 +44,10 @@ export default function IMULogger() {
         <p>
           SD cards stall. A save can take longer than a whole sample period, so sampling and storage cannot share a loop. The firmware splits the work into four prioritized FreeRTOS tasks joined by queues and interrupt-driven notifications.
         </p>
-        <div className="my-6 overflow-x-auto rounded border border-line">
+        <div className="my-6 overflow-x-auto rounded border border-line" tabIndex={0} role="region" aria-label="Firmware tasks, horizontally scrollable">
           <table className="w-full min-w-[520px] border-collapse text-left text-sm">
             <thead>
-              <tr className="bg-mask-700 font-mono text-xs text-silk-3">
+              <tr className="bg-mask-700 font-mono text-xs text-silk-2">
                 <th scope="col" className="px-4 py-3 font-normal">Task</th>
                 <th scope="col" className="px-4 py-3 font-normal">Priority</th>
                 <th scope="col" className="px-4 py-3 font-normal">Job</th>
