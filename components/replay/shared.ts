@@ -26,7 +26,7 @@ export const MODES: { id: Mode; label: string; blurb: string }[] = [
   {
     id: 'filt',
     label: 'Complementary filter',
-    blurb: 'What the firmware logged: the gyro for fast motion, pulled 2% toward the accelerometer every sample so drift cannot build.',
+    blurb: 'What the firmware logged: integrated gyro motion plus a 2% correction toward the accelerometer tilt estimate each sample to reduce drift.',
   },
 ]
 

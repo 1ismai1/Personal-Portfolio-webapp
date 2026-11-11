@@ -1,5 +1,9 @@
 # HANDOFF: finishing the redesign
 
+## Firmware consistency audit, November 11, 2026
+
+User confirmed GitHub is current and the supplied local main.c is older. Checked current main.c (blob c20d13b10775c9fca126933a451beca3cb5ae4ae), FreeRTOS config/hooks, diskio and measurement documentation. Corrected task-count context, scheduling/drop guarantees, DMA polling, unbounded waits, power-loss wording, calibration and clock details. The timing diagram is explicitly conceptual and no longer claims zero total polling. See docs/imu-firmware-audit.md for evidence and scope. Firmware files were not changed.
+
 ## Motion update, November 11, 2026
 
 Follow-up preference: keep the entrance artwork on screen. The work signal, waveform, aligned board, and OTA packets now remain visible after settling, including static artwork in reduced-motion mode.

@@ -55,9 +55,9 @@ export const projects: Project[] = [
     kind: 'Real-time firmware',
     sub: 'C, STM32 Cortex-M4, FreeRTOS, DMA',
     summary:
-      'Register-level firmware that reads a 6-axis IMU at 100 Hz and logs every sample to an SD card. Four prioritized FreeRTOS tasks keep storage from ever delaying sampling, and DMA with ping-pong buffers removed 1.5 ms of CPU busy-waiting from each 10 ms sample.',
+      'Register-level firmware that samples a 6-axis IMU at a 100 Hz target rate and logs to an SD card. Four prioritized logging tasks separate sampling from storage; DMA and ping-pong buffers removed 1.5 ms of CPU busy-waiting per 10 ms sample in testing.',
     lead:
-      'Real-time firmware for an 84 MHz STM32 Cortex-M4 that reads an IMU at 100 Hz, filters it into roll and pitch, and logs every sample to an SD card. Drivers are written at register level and every claim below is backed by a capture or a log.',
+      'Real-time firmware for an 84 MHz STM32 Cortex-M4 that samples an IMU at a 100 Hz target rate, estimates roll and pitch, and logs CSV data to an SD card. Register-level data-path drivers, FreeRTOS queues and DMA separate sampling from storage.',
     status: { label: 'Built and measured', tone: 'ok' },
     stack: ['C', 'STM32F411', 'FreeRTOS', 'DMA', 'I2C 100 kHz', 'SPI 10.5 MHz', 'FatFS'],
     repo: 'https://github.com/1ismai1/imu-logger-stm32',
@@ -70,7 +70,7 @@ export const projects: Project[] = [
     },
     stats: [
       { value: '1.5', unit: 'ms', label: 'CPU busy-wait removed per 10 ms sample' },
-      { value: '4', label: 'prioritized FreeRTOS tasks' },
+      { value: '4', label: 'logging tasks, plus a heartbeat task' },
       { value: '20+', label: 'hardware and firmware faults debugged' },
       { value: '<0.06', unit: '%', label: 'clock error, down from 1.5%' },
     ],

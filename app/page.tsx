@@ -55,7 +55,7 @@ export default function Page() {
         </WorkArrival>
         <ProjectCard project={lead} feature />
 
-        <Evidence id="timing" title="Where the 1.5 ms went" note="One 10 ms sample period, before and after moving bus transfers to DMA. The bus takes just as long. The CPU stops waiting for it.">
+        <Evidence id="timing" title="Where the 1.5 ms went" note="A conceptual view of polling versus DMA. DMA handles payload bytes while the transfer task sleeps; setup and some status checks still use the CPU.">
           <TimingDiagram />
         </Evidence>
 
